@@ -1,0 +1,295 @@
+.dashboard__content, .dashboard__content *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.dashboard__content{
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+.sidebar{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 78px;
+    background: #11101d;
+    padding: 6px 14px;
+    transition: all 0.5s ease;
+}
+
+.sidebar .imageIoT {
+    opacity: 0;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    transition: all 0.5s ease;
+
+    img{
+        width: 6.5rem;
+    }
+}
+.sidebar.active .imageIoT{
+    opacity: 1;
+}
+
+.sidebar.active{
+    width: 240px;
+}
+
+.sidebar .logo_content .logo{
+    color: #fff;
+    display: flex;
+    height: 50px;
+    width: 100px;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.5s ease;
+}
+
+.sidebar.active .logo_content .logo{
+    opacity: 1;
+}
+
+.sidebar .logo_content .logo .logo_name{
+    font-size: 1.2rem;
+    font-weight: 400;
+}
+
+.sidebar #btn{
+    color: #fff;
+    position: absolute;
+    left: 50%;
+    top: 6px;
+    font-size: 20px;
+    height: 50px;
+    width: 50px;
+    text-align: center;
+    line-height: 50px;
+    transform: translateX(-50%);
+    cursor: pointer;
+}
+
+.sidebar.active #btn{
+    left: 90%;
+}
+
+.sidebar ul{
+    margin-top: 10px;
+}
+
+.sidebar ul li{
+    position: relative;
+    width: 100%;
+    margin: 0 5px;
+    list-style: none;
+    line-height: 50px;
+
+    ul{
+        background: #1e1d30;
+        margin-top: 7px;
+        height: 0px;
+        overflow: hidden;
+        transition: all 0.5s ease;
+        
+        li{
+            margin: 0px;
+            a{
+                padding-left: 0px;
+            }
+        }
+    }
+    &:hover ul{
+        height: auto;
+        opacity: 1;
+    }
+}
+
+.sidebar.active ul li {
+    a svg:nth-child(3){
+        display: block;
+    }
+    ul{     
+        li{
+            padding-left: 10px;
+            width: calc(100% - 10px);
+            a{
+                padding-left: 10px;
+            }
+        }
+    }
+}
+.sidebar ul li .tooltip_dash{
+    position: absolute;
+    left: 122px;
+    top: 0%;
+    transform: translate(-50%, -50%);
+    border-radius: 6px;
+    height: 35px;
+    width: 122px;
+    color: #fff;
+    background-color: rgba(17, 16, 29, 0.66);
+    line-height: 35px;
+    text-align: center;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    opacity: 0;
+    display: block;
+}
+
+.sidebar.active ul li .tooltip_dash{
+    display: none;
+}
+
+.sidebar ul li:hover > .tooltip_dash{
+    transition: all 0.5s ease;
+    opacity: 1;
+    top: 50%;
+    z-index: 2;
+}
+
+.sidebar ul li ul:hover{
+    overflow: visible;
+}
+
+.sidebar ul li a{
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    color: #fff;
+    transition: all 0.4s ease;
+    border-radius: 12px;
+    white-space: nowrap;
+
+    span{
+        width: 100%;
+    }
+
+    svg:nth-child(3){
+        display: none;
+    }
+}
+
+.sidebar ul li a:hover{
+    color: #11101d;
+    background: rgb(115, 216, 85);
+
+    svg:nth-child(3){
+        transform: rotate(180deg);
+    }
+
+    &:active{
+        background:red;   
+    }
+}
+
+.sidebar ul li a svg{
+    height: 15px;
+    min-width: 50px;
+    border-radius: 12px;
+    line-height: 50px;
+    text-align: center;
+}
+
+.sidebar .links_name{
+    opacity: 0;
+    pointer-events: none;
+}
+
+.sidebar.active .links_name{
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.sidebar .profile_content{
+    position: absolute;
+    color: #fff;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+.sidebar .profile_content .profile{
+    position: relative;
+    padding: 10px 6px;
+    height: 60px;
+    background: #1d1b31;
+}
+
+.profile_content .profile .profile_details{
+    display: flex;
+    align-items: center;
+    opacity: 0;
+    pointer-events: auto;
+    white-space: nowrap;
+}
+
+.sidebar.active .profile_content .profile .profile_details{
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.profile .profile_details img{
+    height: 45px;
+    width: 45px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.profile .profile_details .name_job{
+    margin-left: 10px;
+}
+
+.profile .profile_details .name{
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.profile #logOut{
+    position: absolute;
+    left: 50%;
+    bottom: 5px;
+    transform: translateX(-50%);
+    min-width: 50px;
+    height: 50px;
+    line-height: 50px;
+    font-size: 20px;
+    line-height: 50px;
+    font-size: 20px;
+    border-radius: 12px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.sidebar.active .profile #logOut{
+    left: 88%;
+}
+
+.content__primary{
+    position: absolute;
+    height: 100vh;
+    width: calc(100% - 78px);
+    left: 78px;
+    padding: 50px;
+    overflow: auto;
+    transition: all 0.5s ease;
+}
+
+.sidebar.active ~ .content__primary{
+    width: calc(100% - 240px);
+    left: 240px;
+}
+
+.colorActive{
+    background: red;
+}
+
+@media screen and(max-width: 800px){
+    .content__primary{
+        padding: 30px;
+    }
+}

@@ -1,0 +1,47 @@
+.seg__primary {
+  overflow: auto;
+  h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 0px 0px 1.5rem 1.5rem;
+    text-shadow: 0px 0px 2px #d9dfde, 0px 0px 2px #d9dfde, 0px 0px 5px #ebebeb,
+      0px 0px 5px #ebebeb, 0px 0px 5px #ebebeb;
+  }
+
+  .seg__content {
+    font-size: 1rem;
+
+    &__status {
+      font-size: 1.2rem;
+      margin: 2rem 1rem;
+      svg {
+        margin: 0px 10px;
+        font-size: 1.5rem;
+      }
+    }
+
+    &__list {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 5px;
+
+      ol {
+        min-width: 500px;
+      }
+    
+
+    &__plano{
+      display: grid;
+      justify-items: center;
+      align-items: center;
+      img{
+        width: 70%;
+      }
+    }
+  }
+
+    > p {
+      margin: 2rem 0px;
+    }
+  }
+}
