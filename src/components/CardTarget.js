@@ -2,10 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 
-const CardTarget = ({ label, cant, color, ftColor }) => {
+const CardTarget = ({ label, cant, color, ftColor, link = "", icon }) => {
   const Card = styled.div`
     background: ${color};
     width: 235px;
@@ -68,11 +67,11 @@ const CardTarget = ({ label, cant, color, ftColor }) => {
           {cant !== "" && <span>{cant}</span>}
         </div>
         <Footer>
-          <Link to="/sensores"> Mas información </Link>
+          <Link to={link}> Mas información </Link>
         </Footer>
       </CardTemplate>
       <div className="ui-second">
-        <FontAwesomeIcon icon={faArrowDown} />
+        <FontAwesomeIcon icon={icon} />
       </div>
     </Card>
   );

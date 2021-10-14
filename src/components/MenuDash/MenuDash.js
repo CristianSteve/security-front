@@ -6,11 +6,13 @@ import {
   faBars,
   faSignOutAlt,
   faChartLine,
-  faTruckMoving,
-  faUsers,
   faEnvelope,
   faUserAstronaut,
   faArrowDown,
+  faBox,
+  faBookReader,
+  faHistory,
+  faLockOpen,
 } from "@fortawesome/free-solid-svg-icons";
 
 import "./menudash.scss";
@@ -38,30 +40,18 @@ export const MenuDash = ({ children }) => {
     },
     {
       title: "Seguimiento",
-      icon: faTruckMoving,
+      icon: faBookReader,
       enlace: "/seguimiento",
     },
-/*     {
-      title: "Servicios",
-      icon: faConciergeBell,
-      enlace: "/servicios",
-      subitem : [
-        {
-          title: "Clientes",
-          icon: faUserAstronaut,
-          enlace: "/customers",
-        }
-      ]
-    }, */
     {
-      title: "Historico",
-      icon: faUsers,
-      enlace: "/history",
+      title: "Control Acceso",
+      icon: faLockOpen,
+      enlace: "/control",
     },
     {
-      title: "Aperturas",
-      icon: faUsers,
-      enlace: "/usuarios",
+      title: "Historico",
+      icon: faHistory,
+      enlace: "/history",
     },
     {
       title: "Sensores",
@@ -69,8 +59,8 @@ export const MenuDash = ({ children }) => {
       enlace: "/mensajes",
       subitem : [
         {
-          title: "Aproximacion",
-          icon: faUserAstronaut,
+          title: "Nuevo Sensor",
+          icon: faBox,
           enlace: "/customers",
         },        {
           title: "NFC",

@@ -7,10 +7,10 @@ const Historico = () => {
     <div className="cont__history">
       <h2>Historico de alertas</h2>
       <hr />
-      <form>
+      <form className="col-5">
         <div class="input-group mt-3">
           <span class="input-group-text" id="basic-addon1">
-            @
+            H
           </span>
           <input
             type="date"
@@ -24,7 +24,7 @@ const Historico = () => {
           <thead class="table-dark">
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Componente</th>
+              <th scope="col">Componente / Sensor</th>
               <th scope="col">Hora</th>
               <th scope="col">Descripción</th>
             </tr>
@@ -32,21 +32,27 @@ const Historico = () => {
           <tbody>
             <tr>
               <th scope="row">1</th>
-              <td>Sensor Puerta principal</td>
-              <td>10:12 05:30:29</td>
-              <td>Apertura inesperada de la ventana</td>
+              <td>Puerta principal</td>
+              <td>10:12 - 05:30:29</td>
+              <td>Apertura inesperada desde el exterior</td>
             </tr>
             <tr>
-            <th scope="row">1</th>
-              <td>Sensor Puerta principal</td>
-              <td>10:12 05:30:29</td>
-              <td>Apertura inesperada de la ventana</td>
+            <th scope="row">2</th>
+              <td>Puerta Balcon</td>
+              <td>14:12 - 05:10:45</td>
+              <td>Cierre de puerta por aplicativo web</td>
             </tr>
             <tr>
-            <th scope="row">1</th>
-              <td>Sensor Puerta principal</td>
-              <td>10:12 05:30:29</td>
-              <td>Apertura inesperada de la ventana</td>
+            <th scope="row">3</th>
+              <td>Ventana Sala</td>
+              <td>18:10 - 01:35:19</td>
+              <td>Se inactiva sensor por Leidy</td>
+            </tr>
+            <tr>
+            <th scope="row">4</th>
+              <td>Ventana Sala</td>
+              <td>18:12 - 03:33:07</td>
+              <td>Se Activa sensor por Administrador</td>
             </tr>
           </tbody>
         </table>

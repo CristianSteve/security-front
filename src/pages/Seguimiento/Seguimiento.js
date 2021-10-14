@@ -9,7 +9,7 @@ const List = styled.li`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background: #2a2d32;
+  background: #161526;
   color: #fff;
   width: 100%;
   padding: 1rem 2rem;
