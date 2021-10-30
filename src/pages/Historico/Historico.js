@@ -8,20 +8,20 @@ const Historico = () => {
       <h2>Historico de alertas</h2>
       <hr />
       <form className="col-5">
-        <div class="input-group mt-3">
-          <span class="input-group-text" id="basic-addon1">
+        <div className="input-group mt-3">
+          <span className="input-group-text" id="basic-addon1">
             H
           </span>
           <input
             type="date"
-            class="form-control"
+            className="form-control"
             placeholder="calendar-check"
           />
         </div>
       </form>
       <div className="mt-5">
-        <table class="table table-striped table-hover">
-          <thead class="table-dark">
+        <table className="table table-striped table-hover">
+          <thead className="table-dark">
             <tr>
               <th scope="col">#</th>
               <th scope="col">Componente / Sensor</th>

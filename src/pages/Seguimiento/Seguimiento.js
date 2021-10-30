@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
+
+import ContextSocket from "../../Hooks/context-socket";
+import useSocket from "../../Hooks/useSocket";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
-
 import "./seguimiento.scss";
 
 const List = styled.li`
@@ -42,7 +45,7 @@ const Switch = styled.div`
     padding-right: 50px;
 
     &:before {
-      content: "Offline";
+      content: "Online";
       position: absolute;
       top: 0;
       bottom: 0;
@@ -71,7 +74,7 @@ const Switch = styled.div`
       &:checked + .switch-button-label:before {
         transform: translateX(50px);
         transition: transform 300ms linear;
-        background: red;
+        background: green;
       }
 
       & + .switch-button-label {
@@ -93,7 +96,7 @@ const Switch = styled.div`
           border-radius: 30px;
           transform: translateX(0);
           transition: transform 300ms;
-          background: green;
+          background: red;
         }
         .switch-button-label-span {
           position: relative;
@@ -105,6 +108,16 @@ const Switch = styled.div`
 `;
 
 const Seguimiento = () => {
+
+  const { Socket } = useContext(ContextSocket);
+  const [ emitServo ] = useSocket(Socket);
+
+
+  const handleChangeCheck = (flag) => {
+    emitServo((flag.target.checked)?"C":"A");
+  }
+
+
   return (
     <div className="seg__primary">
       <h2>Estado de la zona privada</h2>
@@ -130,10 +143,10 @@ const Seguimiento = () => {
                 Sensor Puerta principal
               </Label>
               <Switch>
-                <div class="switch-button">
-                  <input class="switch-button-checkbox" type="checkbox" />
-                  <label class="switch-button-label" for="">
-                    <span class="switch-button-label-span">Online</span>
+                <div className="switch-button">
+                  <input className="switch-button-checkbox" type="checkbox" onChange={handleChangeCheck}/>
+                  <label className="switch-button-label">
+                    <span className="switch-button-label-span">Offline</span>
                   </label>
                 </div>
               </Switch>
@@ -146,10 +159,10 @@ const Seguimiento = () => {
                 Sensor Puerta Balcon
               </Label>
               <Switch>
-                <div class="switch-button">
-                  <input class="switch-button-checkbox" type="checkbox" />
-                  <label class="switch-button-label" for="">
-                    <span class="switch-button-label-span">Online</span>
+                <div className="switch-button">
+                  <input className="switch-button-checkbox" type="checkbox" onChange={handleChangeCheck}/>
+                  <label className="switch-button-label" >
+                    <span className="switch-button-label-span">Offline</span>
                   </label>
                 </div>
               </Switch>
@@ -162,10 +175,10 @@ const Seguimiento = () => {
                 Sensor Puerta Terraza
               </Label>
               <Switch>
-                <div class="switch-button">
-                  <input class="switch-button-checkbox" type="checkbox" />
-                  <label class="switch-button-label" for="">
-                    <span class="switch-button-label-span">Online</span>
+                <div className="switch-button">
+                  <input className="switch-button-checkbox" type="checkbox" />
+                  <label className="switch-button-label" >
+                    <span className="switch-button-label-span">Offline</span>
                   </label>
                 </div>
               </Switch>
@@ -178,10 +191,10 @@ const Seguimiento = () => {
                 Sensor Puerta Garage Auto
               </Label>
               <Switch>
-                <div class="switch-button">
-                  <input class="switch-button-checkbox" type="checkbox" />
-                  <label class="switch-button-label" for="">
-                    <span class="switch-button-label-span">Online</span>
+                <div className="switch-button">
+                  <input className="switch-button-checkbox" type="checkbox" />
+                  <label className="switch-button-label" >
+                    <span className="switch-button-label-span">Offline</span>
                   </label>
                 </div>
               </Switch>
@@ -194,10 +207,10 @@ const Seguimiento = () => {
                 Sensor Ventana Sala
               </Label>
               <Switch>
-                <div class="switch-button">
-                  <input class="switch-button-checkbox" type="checkbox" />
-                  <label class="switch-button-label" for="">
-                    <span class="switch-button-label-span">Online</span>
+                <div className="switch-button">
+                  <input className="switch-button-checkbox" type="checkbox" />
+                  <label className="switch-button-label" >
+                    <span className="switch-button-label-span">Offline</span>
                   </label>
                 </div>
               </Switch>
@@ -210,10 +223,10 @@ const Seguimiento = () => {
                 Sensor Ventana Zona de Juegos
               </Label>
               <Switch>
-                <div class="switch-button">
-                  <input class="switch-button-checkbox" type="checkbox" />
-                  <label class="switch-button-label" for="">
-                    <span class="switch-button-label-span">Online</span>
+                <div className="switch-button">
+                  <input className="switch-button-checkbox" type="checkbox" />
+                  <label className="switch-button-label" >
+                    <span className="switch-button-label-span">Offline</span>
                   </label>
                 </div>
               </Switch>

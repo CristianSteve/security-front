@@ -3,6 +3,7 @@ import CardTarget from "../../components/CardTarget";
 import { faArrowDown, faHistory, faDoorOpen, faWindowRestore } from "@fortawesome/free-solid-svg-icons";
 
 import styled from "styled-components";
+import "./status.scss";
 
 const Access = styled.div`
   display: flex;
@@ -12,7 +13,12 @@ const Access = styled.div`
 
 const Status = () => {
   return (
-    <div>
+    <div className="dash">
+      <p className="dash__title">DashBoard</p>
+      <div className="dash__intro">
+        <p>Bienvenido, Cristian Steve </p>
+        <span>Este portal esta diseñado para administrar los accesos de tu area privada. Recuerda que puedes acceder tabien desde tus dispositivos moviles, donde recibiras las notificaciones y alertas generadas por tu area </span>
+      </div>
       <Access>
         <CardTarget label="Puertas" cant="6" color="#6c63ff" ftColor="#4e48b5" icon={faDoorOpen}/>
         <CardTarget label="Ventanas" cant="9" color="#ff6380" ftColor="#c14c61" icon={faWindowRestore}/>

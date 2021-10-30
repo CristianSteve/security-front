@@ -1,0 +1,21 @@
+.dash{
+
+    &__title{
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+
+    &__intro{
+        padding: 35px 30px;
+        border-left: 2.5px solid red;
+        margin: 1rem;
+        margin-bottom: 3rem;
+        box-shadow: 1px 1px 5px #ccc;
+
+        p{
+            font-weight: bold; 
+            font-size: 1.1rem;
+            padding-bottom: 1rem;  
+        }
+    }
+}
