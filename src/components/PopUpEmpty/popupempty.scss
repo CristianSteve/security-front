@@ -1,0 +1,54 @@
+.pop__content {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+}
+
+.body__pop {
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 1px 1px 10px #333;
+  position: relative;
+  overflow: auto;
+  width: 80vw;
+  height: 90vh;
+  padding: 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  animation: popup 1s ease;
+  
+  @keyframes popup {
+    from {
+      width: 60vw;
+      height: 60vh;
+    }
+    to{
+      width: 80vw;
+      height: 90vh;
+      overflow: hidden;
+    }
+  }
+  
+  >span {
+    display: flex;
+    justify-content: flex-end;
+    font-weight: bold;
+    font-size: 2rem;
+    cursor: pointer;
+  }
+}
+
+@media screen and (max-width: 480px){
+  .body__pop {
+    width: 95vw;
+    height: 95vh;
+    padding: 1rem;
+  }
+}

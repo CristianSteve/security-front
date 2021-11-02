@@ -3,8 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 
 const Card = styled.div`
-  height: 240px;
-  width: 200px;
+  height: 260px;
+  width: 210px;
   box-shadow: 1px 2px 5px #ccc;
 `;
 
@@ -41,10 +41,10 @@ const Body = styled.div`
   }
 `;
 
-const CardComponent = ({nameComponent, created, statusComponent, iconComponent, newComponent=false, eventClick=()=>{}}) => {
+const CardComponent = ({nameComponent, created, statusComponent, iconComponent, newComponent=false, eventClick=()=>{}, eventComponent =()=>{}}) => {
   return (
     <Card>
-      <Head>
+      <Head onClick={eventComponent}>
         <FontAwesomeIcon icon={iconComponent} />
       </Head>
       <Body>
@@ -60,7 +60,7 @@ const CardComponent = ({nameComponent, created, statusComponent, iconComponent, 
           <li className="ult">
             <span>Abrir/Cerrar </span>
             <div className="form-check form-switch ms-2">
-              <input className="form-check-input" type="checkbox" disabled={!statusComponent} onChange={eventClick}/>
+              <input className="form-check-input" type="checkbox" disabled={!statusComponent} onChange={eventClick} />
             </div>
           </li>
         </ol>

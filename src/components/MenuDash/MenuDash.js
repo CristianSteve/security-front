@@ -13,6 +13,7 @@ import {
   faBookReader,
   faHistory,
   faLockOpen,
+  faCogs,
 } from "@fortawesome/free-solid-svg-icons";
 
 import "./menudash.scss";
@@ -37,6 +38,11 @@ export const MenuDash = ({ children }) => {
       title: "DashBoard",
       icon: faChartLine,
       enlace: "/status",
+    },
+    {
+      title: "Configuraciones",
+      icon: faCogs,
+      enlace: "/setting",
     },
     {
       title: "Seguimiento",
@@ -112,15 +118,19 @@ export const MenuDash = ({ children }) => {
         <div className="profile_content">
           <div className="profile">
             <div className="profile_details">
-              <img src="" alt="" />
+              <Link to="/profile">
+                <img src="" alt="" />
+              </Link>
               <div className="name_job">
                 <div className="name">@nombreUser</div>
                 <div className="job">Online</div>
               </div>
             </div>
-            <div id="logOut">
-              <FontAwesomeIcon icon={faSignOutAlt} />
-            </div>
+            <a rel="noopener noreferrer" href="/login">
+              <div id="logOut">
+                <FontAwesomeIcon icon={faSignOutAlt} />
+              </div>
+            </a>
           </div>
         </div>
       </div>

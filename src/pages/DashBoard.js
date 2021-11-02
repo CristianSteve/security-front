@@ -17,6 +17,8 @@ export const DashBoard = () => {
             <Route exact path="/seguimiento" component={Seguimiento} />
             <Route exact path="/history" component={Historico} />
             <Route exact path="/control" component={Control} />
+            <Route exact path="/setting" component={Control} />
+            <Route exact path="/profile" component={Control} />
           </Switch>
         </ContextSocketProvider>
       </MenuDash>
