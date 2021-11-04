@@ -1,15 +1,14 @@
 import React, { useContext, useState } from "react";
 
 import CardComponent from "../../components/CardComponent";
-import Input from "../../components/Input";
 import PopUpEmpty from "../../components/PopUpEmpty/PopUpEmpty";
-import { useForm } from "../../Hooks/useForm";
 
 import ContextSocket from "../../Hooks/context-socket";
 import useSocket from "../../Hooks/useSocket";
 
 import { faDoorOpen, faWindowMaximize, faPlus } from "@fortawesome/free-solid-svg-icons";
 import "./control.scss";
+import ComponentArduino from "../Component/ComponentArduino";
 
 const Control = () => {
 
@@ -18,12 +17,6 @@ const Control = () => {
   const [pop, setPop] = useState(false);
 
   const [show, setshow] = useState(false);
-  const [values, handleInputChange] = useForm({nombre : "", componente : "", tipo : "", estado : ""});
-  const {nombre, componente, tipo, estado} = values;
-
-  const handleSubmitComponent = (e) => {
-      e.preventDefault();
-  }
 
   const handleChangeCheck = (flag) => {
     emitServo((flag.target.checked)?"C":"A");
@@ -44,12 +37,7 @@ const Control = () => {
         <CardComponent nameComponent="Nuevo Componente" iconComponent={faPlus} newComponent={true} eventComponent={()=>{setshow(!show)}}/>
       </div>
       <PopUpEmpty show={show} hide={setshow}>
-        <form onSubmit={handleSubmitComponent}>
-            <Input placeholder="Nombre Componente" nameComponent="nombre" value={nombre} handleChange={handleInputChange}/>
-            <Input placeholder="Componente" nameComponent="componente" value={componente} handleChange={handleInputChange}/>
-            <Input placeholder="Tipo" nameComponent="tipo" value={tipo} handleChange={handleInputChange}/>
-            <Input placeholder="Estado" nameComponent="estado" value={estado} handleChange={handleInputChange}/>
-        </form>
+        <ComponentArduino />
       </PopUpEmpty>
       {pop &&
       <div className="">

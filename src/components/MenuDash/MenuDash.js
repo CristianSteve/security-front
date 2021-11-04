@@ -62,16 +62,16 @@ export const MenuDash = ({ children }) => {
     {
       title: "Sensores",
       icon: faEnvelope,
-      enlace: "/mensajes",
+      enlace: "#",
       subitem : [
         {
           title: "Nuevo Sensor",
           icon: faBox,
-          enlace: "/customers",
+          enlace: "/sensor",
         },        {
           title: "NFC",
           icon: faUserAstronaut,
-          enlace: "/customers",
+          enlace: "/nfc",
         }
       ]
     },

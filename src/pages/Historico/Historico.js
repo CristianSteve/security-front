@@ -1,36 +1,45 @@
 import React from "react";
-import {useForm} from '../../Hooks/useForm';
+import { Input, InputSelect } from "../../components/Input";
+import { useForm } from "../../Hooks/useForm";
+import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 
 import "./historico.scss";
 
 const Historico = () => {
-
-  const [values, handleInputChange] = useForm({calendar : ""});
-  const { calendar } = values;
+  const [values, handleInputChange] = useForm({ calendar: "", component: "" });
+  const { calendar, component } = values;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("buscando")
-  }
+    alert("buscando");
+  };
 
   return (
     <div className="cont__history">
       <h2>Historico de alertas</h2>
       <hr />
-      <form className="col-5" onSubmit={handleSubmit}>
-        <div className="input-group mt-3">
-          <span className="input-group-text" id="basic-addon1">
-            H
-          </span>
-          <input
+      <form className="row g-3 mt-3" onSubmit={handleSubmit}>
+        <div className="col-auto">
+          <Input
+            icon={faCalendar}
             type="date"
-            className="form-control"
             placeholder="calendar"
-            name="calendar"
+            nameComponent="calendar"
             value={calendar}
-            onChange={handleInputChange}
+            handleChange={handleInputChange}
           />
-          <button className="btn btn-primary" type="submit">Buscar</button>
+        </div>
+        <InputSelect
+          listOption={[{ id: 1, item: "Puerta" }, {id : 2, item : "Ventana"}]}
+          nameComponent="component"
+          placeholder="Componente"
+          value={component}
+          handleChange={handleInputChange}
+        />
+        <div class="col-auto">
+          <button className="btn btn-primary" type="submit">
+            Buscar
+          </button>
         </div>
       </form>
       <div className="mt-5">
@@ -53,21 +62,21 @@ const Historico = () => {
               <td>Apertura inesperada desde el exterior</td>
             </tr>
             <tr>
-            <th scope="row">2</th>
+              <th scope="row">2</th>
               <td>Puerta Balcon</td>
               <td>14:12 - 05:10:45</td>
               <td>Cristian Steve</td>
               <td>Cierre de puerta por aplicativo web</td>
             </tr>
             <tr>
-            <th scope="row">3</th>
+              <th scope="row">3</th>
               <td>Ventana Sala</td>
               <td>18:10 - 01:35:19</td>
               <td>Cristian Steve</td>
               <td>Se inactiva sensor por Leidy</td>
             </tr>
             <tr>
-            <th scope="row">4</th>
+              <th scope="row">4</th>
               <td>Ventana Sala</td>
               <td>18:12 - 03:33:07</td>
               <td>Cristian Steve</td>
