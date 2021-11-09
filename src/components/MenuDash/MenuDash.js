@@ -83,7 +83,7 @@ export const MenuDash = ({ children }) => {
       <div ref={refSidebar} className="sidebar active">
         <div className="logo_content">
           <div className="logo">
-            <div className="logo_name">Security IoT</div>
+            <div className="logo_name">Windoor IoT</div>
           </div>
           <div ref={refMenu} id="btn">
             <FontAwesomeIcon icon={faBars} />

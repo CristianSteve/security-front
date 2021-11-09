@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import axios from "axios";
 import useAuth from "./useAuth";
 
@@ -9,7 +9,7 @@ export const useSettings = () => {
   const [errorConf, setErrorConf] = useState(null);
   const { user } = useAuth();
 
-  const listConfig = async (id) => {
+  const listConfig = useCallback( async (id) => {
     console.log("Ejecutando get de useSettings " + id)
     await axios
       .get("http://192.168.1.58:4000/api/configuracion/" + id,
@@ -22,24 +22,22 @@ export const useSettings = () => {
       .then((data) => {
         setDataConf(data.data.data)
         setLoadingConf(false)
-        console.log(data.data.data)
       })
       .catch((errorConf) => {
         setErrorConf(errorConf)
         setLoadingConf(false)      
       });
-  };
+  },[user.token])
 
-  const modifySettings = async ({...rest}, id ) => {
-    console.log("Ejecutando path de useSettings", {...rest})
+  const modifySettings = useCallback( async ({...rest}) => {
     await axios
-      .patch("http://192.168.1.58:4000/api/configuracion/" + id,
+      .patch("http://192.168.1.58:4000/api/configuracion/" + rest.id,
+        { ...rest},
         {headers: 
             {
                 'tsec' : user.token
             }
         },
-        { ...rest}
         )
       .then((data) => {
         setDataConf(data.data.data)
@@ -49,7 +47,7 @@ export const useSettings = () => {
         setErrorConf(errorUser)
         setLoadingConf(false)
       });
-  };
+  },[user.token])
 
   return { dataConf, loadingConf, errorConf, listConfig, modifySettings }
 };

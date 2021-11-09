@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
+const CHECKBOX = "checkbox";
 
 export const useForm = (initialState = {}) => {
 	const [values, setValues] = useState(initialState);
 
 	const handleInputChange = ({ target }) => {
-		if(target.type === "checkbox")
+		if(target.type === CHECKBOX)
 			setValues({
 				...values,
 				[target.name]: target.checked,
@@ -16,9 +17,13 @@ export const useForm = (initialState = {}) => {
 			});
 	};
 
+	const handlePushState = useCallback((...newValues) =>{
+		setValues(...newValues)
+	},[])
+
 	const resetInput = () =>{
 		setValues(initialState)
 	} 
 
-	return [values, handleInputChange, resetInput];
+	return [values, handleInputChange, handlePushState, resetInput];
 };

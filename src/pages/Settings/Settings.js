@@ -11,9 +11,9 @@ const subTitle = [
 
 const Settings = () => {
 
-  const [values, handleInputChange] = useForm({email: false, whatsapp: false, push: false, 
-         ModCom : false, ApeCom: false, CerrCom: false, AccCon: false, ModPer: false});
-  const { email, whatsapp, push,ModCom, ApeCom, CerrCom, AccCon, ModPer } = values;
+  const [values, handleInputChange, handlePushState] = useForm({email: false, whatsapp: false, push: false, 
+         estado : false, apertura: false, cerrar: false, acceso: false, perfil: false});
+  const { email, whatsapp, push, estado, apertura, cerrar, acceso, perfil } = values;
   const [notify, alert] = subTitle;
 
   const { dataConf, loadingConf, listConfig, modifySettings } = useSettings();
@@ -22,22 +22,20 @@ const Settings = () => {
 
   useEffect(() => {
     listConfig(user.id);
-  }, [user.id]);
+  }, [user.id, listConfig]);
+
+  useEffect(() => {
+    if(!!dataConf) handlePushState(dataConf);
+  }, [dataConf, handlePushState])
 
   const handleSubmitNotify = (e) =>{
     e.preventDefault();
-    console.log({email, whatsapp, push})
-    modifySettings(1);
+    modifySettings({...dataConf, email, whatsapp, push});
   }
 
   const handleSubmitAlert = (e) =>{
     e.preventDefault();
-    console.log({ModCom,
-      ApeCom,
-      CerrCom,
-      AccCon,
-      ModPer})
-    modifySettings(1);
+    modifySettings({...dataConf, estado, apertura, cerrar, acceso, perfil});
   }
   return (
     <div className="container">
@@ -52,10 +50,11 @@ const Settings = () => {
           <div className="app-card app-card-settings shadow-sm p-4">
             <div className="app-card-body">
               <form className="settings-form" onSubmit={handleSubmitNotify}>
-                {!loadingConf && dataConf && <>
-                <CheckBox placeholder="Correo electronico" defChecked={dataConf.email} nameComponent="email" handleChange={handleInputChange}/>
-                <CheckBox placeholder="WhatsApp (Facebook)" defChecked={dataConf.whatsapp} nameComponent="whatsapp" handleChange={handleInputChange}/>
-                <CheckBox placeholder="Push Web" defChecked={dataConf.push} nameComponent="push" handleChange={handleInputChange}/>
+                {!loadingConf && dataConf && 
+                <>
+                  <CheckBox placeholder="Correo electronico" defChecked={dataConf.email} nameComponent="email" handleChange={handleInputChange}/>
+                  <CheckBox placeholder="WhatsApp (Facebook)" defChecked={dataConf.whatsapp} nameComponent="whatsapp" handleChange={handleInputChange}/>
+                  <CheckBox placeholder="Push Web" defChecked={dataConf.push} nameComponent="push" handleChange={handleInputChange}/>
                 </>
                 }
                 <div className="mt-3">
@@ -78,12 +77,13 @@ const Settings = () => {
           <div className="app-card app-card-settings shadow-sm p-4">
             <div className="app-card-body">
               <form className="settings-form" onSubmit={handleSubmitAlert}>
-              {!loadingConf && dataConf && <>
-                <CheckBox placeholder="Modificar estado componente" defChecked={dataConf.estado} tSwitch={true} nameComponent="ModCom" handleChange={handleInputChange}/>
-                <CheckBox placeholder="Aperturar componente" defChecked={dataConf.apertura} tSwitch={true} nameComponent="ApeCom" handleChange={handleInputChange}/>
-                <CheckBox placeholder="Cerrar componente" defChecked={dataConf.cerrar} tSwitch={true} nameComponent="CerrCom" handleChange={handleInputChange}/>
-                <CheckBox placeholder="Accesos no controlados" defChecked={dataConf.acceso} tSwitch={true} nameComponent="AccCon" handleChange={handleInputChange}/>
-                <CheckBox placeholder="Modificar perfil" defChecked={dataConf.perfil} tSwitch={true} nameComponent="ModPer" handleChange={handleInputChange}/>
+              {!loadingConf && dataConf && 
+                <>
+                  <CheckBox placeholder="Modificar estado componente" defChecked={dataConf.estado} tSwitch={true} nameComponent="estado" handleChange={handleInputChange}/>
+                  <CheckBox placeholder="Aperturar componente" defChecked={dataConf.apertura} tSwitch={true} nameComponent="apertura" handleChange={handleInputChange}/>
+                  <CheckBox placeholder="Cerrar componente" defChecked={dataConf.cerrar} tSwitch={true} nameComponent="cerrar" handleChange={handleInputChange}/>
+                  <CheckBox placeholder="Accesos no controlados" defChecked={dataConf.acceso} tSwitch={true} nameComponent="acceso" handleChange={handleInputChange}/>
+                  <CheckBox placeholder="Modificar perfil" defChecked={dataConf.perfil} tSwitch={true} nameComponent="perfil" handleChange={handleInputChange}/>
                 </>}
                 <div className="mt-3">
                   <button type="submit" className="btn btn-primary">
