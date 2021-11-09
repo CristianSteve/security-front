@@ -37,7 +37,7 @@ export const InputFloating = ({
   handleChange = () => {},
 }) => {
   return (
-    <div className="form-floating">
+    <div className="form-floating mt-3">
      <input
         type={type}
         placeholder={placeholder}
@@ -59,8 +59,8 @@ export const InputSelect = ({
   handleChange = () => {},
 }) => {
   return (
-    <div className="col-sm-3">
-      <label className="visually-hidden" htmlFor="specificSizeSelect">
+    <div className="col-sm-3 mb-3">
+      <label className={`${!placeholder && "visually-hidden"}`}>
         {placeholder}
       </label>
       <select
@@ -69,11 +69,33 @@ export const InputSelect = ({
         value={value}
         onChange={handleChange}
       >
-        <option selected>Seleccionar</option>
+        <option defaultValue>Seleccionar</option>
         {listOption.map((list) => (
-          <option value={list.id}>{list.item}</option>
+          <option key={list.id} value={list.id}>{list.nombre}</option>
         ))}
       </select>
     </div>
   );
 };
+
+export const CheckBox = ({
+  nameComponent = "",
+  placeholder = "",
+  tSwitch = false,
+  defChecked = false,
+  handleChange = () => {}}) =>{
+  return (
+    <div className={`form-check ${tSwitch && "form-switch"} mb-3`}>
+    <input
+      className="form-check-input"
+      type="checkbox"
+      name={nameComponent}
+      onChange={handleChange}
+      defaultChecked={defChecked}
+    />
+    <label className="form-check-label">
+      {placeholder}
+    </label>
+  </div>
+  )
+}

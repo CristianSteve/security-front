@@ -17,10 +17,12 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import "./menudash.scss";
+import useAuth from "../../Hooks/useAuth";
 
 export const MenuDash = ({ children }) => {
   const refMenu = useRef({});
   const refSidebar = useRef({});
+  const {logout, user} =  useAuth();
 
   useEffect(() => {
     const btn = refMenu.current;
@@ -122,15 +124,15 @@ export const MenuDash = ({ children }) => {
                 <img src="" alt="" />
               </Link>
               <div className="name_job">
-                <div className="name">@nombreUser</div>
+                <div className="name">{user.username}</div>
                 <div className="job">Online</div>
               </div>
             </div>
-            <a rel="noopener noreferrer" href="/login">
+            <button onClick={logout}>
               <div id="logOut">
                 <FontAwesomeIcon icon={faSignOutAlt} />
               </div>
-            </a>
+            </button>
           </div>
         </div>
       </div>

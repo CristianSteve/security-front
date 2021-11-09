@@ -17,7 +17,6 @@
   box-shadow: 1px 1px 10px #333;
   position: relative;
   overflow: auto;
-  width: 80vw;
   height: 90vh;
   padding: 1rem 2rem;
   display: flex;
@@ -37,11 +36,15 @@
   }
   
   >span {
-    display: flex;
-    justify-content: flex-end;
-    font-weight: bold;
+    display: grid;
+    justify-content: end;
     font-size: 2rem;
-    cursor: pointer;
+    
+    label{
+      cursor: pointer;
+      font-weight: bold;
+      padding: 0.5rem 1rem;
+    }
   }
 }
 

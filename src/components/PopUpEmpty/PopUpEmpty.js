@@ -3,7 +3,7 @@ import React from "react";
 import "./popupempty.scss";
 
 const PopUpEmpty = ({
-  widht = "60vw",
+  width = "80vw",
   height = "50vh",
   show = false,
   hide,
@@ -13,8 +13,8 @@ const PopUpEmpty = ({
     <>
       {show && (
         <div className="pop__content">
-          <div className="body__pop">
-            <span onClick={()=> hide(false)}>x</span>
+          <div className="body__pop" style={{width}}>
+            <span><label onClick={()=> hide(false)}>x</label></span>
             <div>{children}</div>
           </div>
         </div>

@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import NotFound from "../components/NotFound.js/NotFound";
+import NotFound from "../components/NotFound/NotFound";
 import { DashBoard } from "../pages/DashBoard";
 import Home from "../pages/Login/home/Home";
 

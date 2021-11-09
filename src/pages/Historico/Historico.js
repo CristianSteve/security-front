@@ -1,21 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Input, InputSelect } from "../../components/Input";
 import { useForm } from "../../Hooks/useForm";
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
+import { useHistory } from "../../Hooks/useHistory";
 
 import "./historico.scss";
+import { useComponent } from "../../Hooks/useComponent";
+import { ModalAlert } from "../../components/ModalAlert";
 
 const Historico = () => {
-  const [values, handleInputChange] = useForm({ calendar: "", component: "" });
+  const [ values, handleInputChange ] = useForm({ calendar: "", component: "" });
   const { calendar, component } = values;
+  
+  const [errorModal, setErrorModal] = useState({isError: false,message: ""});
+  const { isError, message } = errorModal;
+
+  const isErrorReset = () => setErrorModal({ isError: false, message: "" });
+  const { response: { dataH, loadingH, errorH }} = useHistory();
+  const { response: { data, error }} = useComponent();
+
+  useEffect(() => {
+    if(errorH)
+      setErrorModal({isError: true, message : errorH});
+    if(error)
+      setErrorModal({isError: true, message : error});
+  }, [errorH, error])
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("buscando");
+    if(!calendar)
+      setErrorModal({isError: true, message : "No se informo el calendario"});
+
+    if(!component || component === "Seleccionar")
+      setErrorModal({isError: true, message : "No se informo el input"});
+
   };
 
   return (
     <div className="cont__history">
+      <ModalAlert show={isError} onHide={() => isErrorReset()} messageError={message} />
       <h2>Historico de alertas</h2>
       <hr />
       <form className="row g-3 mt-3" onSubmit={handleSubmit}>
@@ -29,61 +52,45 @@ const Historico = () => {
             handleChange={handleInputChange}
           />
         </div>
-        <InputSelect
-          listOption={[{ id: 1, item: "Puerta" }, {id : 2, item : "Ventana"}]}
-          nameComponent="component"
-          placeholder="Componente"
-          value={component}
-          handleChange={handleInputChange}
-        />
-        <div class="col-auto">
-          <button className="btn btn-primary" type="submit">
-            Buscar
-          </button>
+        {!error &&
+          <InputSelect
+            listOption={data}
+            nameComponent="component"
+            value={component}
+            handleChange={handleInputChange}
+          />
+        }
+        <div className="col-auto">
+          <button className="btn btn-primary" type="submit">Buscar </button>
         </div>
       </form>
       <div className="mt-5">
-        <table className="table table-striped table-hover">
-          <thead className="table-dark">
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Componente / Sensor</th>
-              <th scope="col">Hora</th>
-              <th scope="col">Usuario</th>
-              <th scope="col">Descripción</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Puerta principal</td>
-              <td>10:12 - 05:30:29</td>
-              <td>Cristian Steve</td>
-              <td>Apertura inesperada desde el exterior</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Puerta Balcon</td>
-              <td>14:12 - 05:10:45</td>
-              <td>Cristian Steve</td>
-              <td>Cierre de puerta por aplicativo web</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Ventana Sala</td>
-              <td>18:10 - 01:35:19</td>
-              <td>Cristian Steve</td>
-              <td>Se inactiva sensor por Leidy</td>
-            </tr>
-            <tr>
-              <th scope="row">4</th>
-              <td>Ventana Sala</td>
-              <td>18:12 - 03:33:07</td>
-              <td>Cristian Steve</td>
-              <td>Se Activa sensor por Administrador</td>
-            </tr>
-          </tbody>
-        </table>
+          <table className="table table-striped table-hover">
+            <thead className="table-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Componente</th>
+                <th scope="col">Fecha/Hora</th>
+                <th scope="col">Usuario</th>
+                <th scope="col">Descripción</th>
+              </tr>
+            </thead>
+            <tbody>
+            {!loadingH && !errorH &&(
+              <>
+              {dataH.map((h) => (
+                <tr key={h.id}>
+                  <th scope="row">{h.id}</th>
+                  <td>{h.Componente_idComponente}</td>
+                  <td>{h.createdAt.substring(0,10)}</td>
+                  <td>{h.usuario}</td>
+                  <td>{h.descripcion}</td>
+                </tr>
+              ))}
+              </>
+            )}
+            </tbody>
+          </table>
       </div>
     </div>
   );

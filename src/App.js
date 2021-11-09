@@ -1,11 +1,16 @@
 import RouteAPP from "./routers/RouteApp";
+import AuthProvider from "./Auth/AuthProvider";
+
+
 import "bootstrap/dist/css/bootstrap.css";
 import "./App.css";
 
 function App() {
   return (
     <div className="App">
-      <RouteAPP />
+      <AuthProvider>
+        <RouteAPP />
+      </AuthProvider>
     </div>
   );
 }

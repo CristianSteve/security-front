@@ -6,16 +6,19 @@ import PopUpEmpty from "../../components/PopUpEmpty/PopUpEmpty";
 import ContextSocket from "../../Hooks/context-socket";
 import useSocket from "../../Hooks/useSocket";
 
-import { faDoorOpen, faWindowMaximize, faPlus } from "@fortawesome/free-solid-svg-icons";
-import "./control.scss";
+import { faPlus, faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 import ComponentArduino from "../Component/ComponentArduino";
+import { useComponent } from "../../Hooks/useComponent";
+
+import "./control.scss";
 
 const Control = () => {
 
-  const { Socket } = useContext(ContextSocket);
-  const [ emitServo ] = useSocket(Socket);
-  const [pop, setPop] = useState(false);
+  const { content : {socketIO} } = useContext(ContextSocket);
+  const [ emitServo ] = useSocket(socketIO);
 
+  const [pop, setPop] = useState(false);
+  const {response: { data, loading }} = useComponent();
   const [show, setshow] = useState(false);
 
   const handleChangeCheck = (flag) => {
@@ -30,13 +33,18 @@ const Control = () => {
     <div className="cont__control">
       <h2>Control de Componentes</h2>
       <hr />
-      <div className="content__card">
-        <CardComponent nameComponent="Puerta Balcon" created="2021-01-01" statusComponent={true} iconComponent={faDoorOpen} eventClick={handleChangeCheck}/>
-        <CardComponent nameComponent="Vetana Alcoba" created="2021-01-01" statusComponent={true} iconComponent={faWindowMaximize} eventClick={handleChangeCheck}/>
-        <CardComponent nameComponent="Puerta Pricipal" created="2021-01-01" statusComponent={false} iconComponent={faDoorOpen} eventClick={handleChangeCheck}/>
-        <CardComponent nameComponent="Nuevo Componente" iconComponent={faPlus} newComponent={true} eventComponent={()=>{setshow(!show)}}/>
-      </div>
-      <PopUpEmpty show={show} hide={setshow}>
+      {!loading && 
+        <div className="content__card">
+          {data.map((c) => (
+            <CardComponent key={c.id} nameComponent={c.nombre}created={c.createdAt.substring(0,10)} statusComponent={c.status} iconComponent={faQuestionCircle} eventClick={handleChangeCheck}/>  
+          ))}
+{/*           <CardComponent nameComponent="Puerta Balcon" created="2021-01-01" statusComponent={true} iconComponent={faDoorOpen} eventClick={handleChangeCheck}/>
+          <CardComponent nameComponent="Vetana Alcoba" created="2021-01-01" statusComponent={true} iconComponent={faWindowMaximize} eventClick={handleChangeCheck}/>
+          <CardComponent nameComponent="Puerta Pricipal" created="2021-01-01" statusComponent={false} iconComponent={faDoorOpen} eventClick={handleChangeCheck}/> */}
+          <CardComponent nameComponent="Nuevo Componente" iconComponent={faPlus} newComponent={true} eventComponent={()=>{setshow(!show)}}/>
+        </div>
+      }
+      <PopUpEmpty show={show} hide={setshow} width="60vw">
         <ComponentArduino />
       </PopUpEmpty>
       {pop &&

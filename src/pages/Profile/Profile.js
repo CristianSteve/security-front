@@ -1,20 +1,21 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Profile = () => {
   return (
-    <div class="container">
-      <div class="row gy-4">
-        <div class="col-12 col-lg-6">
-          <div class="card card-account shadow-sm d-flex flex-column align-items-start">
-            <div class="card-header p-3 border-bottom-0">
-              <div class="row align-items-center gx-3">
-                <div class="col-auto">
-                  <div class="icon-holder">
+    <div className="container">
+      <div className="row gy-4">
+        <div className="col-12 col-lg-6">
+          <div className="card card-account shadow-sm d-flex flex-column align-items-start">
+            <div className="card-header p-3 border-bottom-0">
+              <div className="row align-items-center gx-3">
+                <div className="col-auto">
+                  <div className="icon-holder">
                     <svg
                       width="1em"
                       height="1em"
                       viewBox="0 0 16 16"
-                      class="bi bi-person"
+                      className="bi bi-person"
                       fill="currentColor"
                       xmlns="http://www.w3.org/2000/svg"
                     >
@@ -25,153 +26,153 @@ const Profile = () => {
                     </svg>
                   </div>
                 </div>
-                <div class="col-auto">
-                  <h4 class="card-title">Profile</h4>
+                <div className="col-auto">
+                  <h4 className="card-title">Profile</h4>
                 </div>
               </div>
             </div>
-            <div class="card-body px-4 w-100">
-              <div class="item border-bottom py-3">
-                <div class="row justify-content-between align-items-center">
-                  <div class="col-auto">
-                    <div class="item-label mb-2">
+            <div className="card-body px-4 w-100">
+              <div className="item border-bottom py-3">
+                <div className="row justify-content-between align-items-center">
+                  <div className="col-auto">
+                    <div className="item-label mb-2">
                       <strong>Photo</strong>
                     </div>
-                    <div class="item-data">
+                    <div className="item-data">
                       <img
-                        class="profile-image"
+                        className="profile-image"
                         src="assets/images/user.png"
                         alt=""
                       />
                     </div>
                   </div>
-                  <div class="col text-end">
-                    <a class="btn-sm btn-secondary" href="#">
+                  <div className="col text-end">
+                    <Link className="btn-sm btn-secondary" to="#">
                       Change
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
-              <div class="item border-bottom py-3">
-                <div class="row justify-content-between align-items-center">
-                  <div class="col-auto">
-                    <div class="item-label">
+              <div className="item border-bottom py-3">
+                <div className="row justify-content-between align-items-center">
+                  <div className="col-auto">
+                    <div className="item-label">
                       <strong>Name</strong>
                     </div>
-                    <div class="item-data">Cristian Steve</div>
+                    <div className="item-data">Cristian Steve</div>
                   </div>
-                  <div class="col text-end">
-                    <a class="btn-sm btn-secondary" href="#">
+                  <div className="col text-end">
+                    <Link className="btn-sm btn-secondary" to="#">
                       Change
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
-              <div class="item border-bottom py-3">
-                <div class="row justify-content-between align-items-center">
-                  <div class="col-auto">
-                    <div class="item-label">
+              <div className="item border-bottom py-3">
+                <div className="row justify-content-between align-items-center">
+                  <div className="col-auto">
+                    <div className="item-label">
                       <strong>Email</strong>
                     </div>
-                    <div class="item-data">ccristiansteve@gmail.com</div>
+                    <div className="item-data">ccristiansteve@gmail.com</div>
                   </div>
-                  <div class="col text-end">
-                    <a class="btn-sm btn-secondary" href="#">
+                  <div className="col text-end">
+                    <Link className="btn-sm btn-secondary" to="#">
                       Change
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
-              <div class="item border-bottom py-3">
-                <div class="row justify-content-between align-items-center">
-                  <div class="col-auto">
-                    <div class="item-label">
+              <div className="item border-bottom py-3">
+                <div className="row justify-content-between align-items-center">
+                  <div className="col-auto">
+                    <div className="item-label">
                       <strong>Telefono</strong>
                     </div>
-                    <div class="item-data">300 868 6708</div>
+                    <div className="item-data">300 868 6708</div>
                   </div>
-                  <div class="col text-end">
-                    <a class="btn-sm btn-secondary" href="#">
+                  <div className="col text-end">
+                    <Link className="btn-sm btn-secondary" to="#">
                       Change
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
-              <div class="item border-bottom py-3">
-                <div class="row justify-content-between align-items-center">
-                  <div class="col-auto">
-                    <div class="item-label">
+              <div className="item border-bottom py-3">
+                <div className="row justify-content-between align-items-center">
+                  <div className="col-auto">
+                    <div className="item-label">
                       <strong>Dirección</strong>
                     </div>
-                    <div class="item-data">KR 98A #67 - 22</div>
+                    <div className="item-data">KR 98A #67 - 22</div>
                   </div>
-                  <div class="col text-end">
-                    <a class="btn-sm btn-secondary" href="#">
+                  <div className="col text-end">
+                    <Link className="btn-sm btn-secondary" to="#">
                       Change
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
-              <div class="item py-3">
-                <div class="row justify-content-between align-items-center">
-                  <div class="col-auto">
-                    <div class="item-label">
+              <div className="item py-3">
+                <div className="row justify-content-between align-items-center">
+                  <div className="col-auto">
+                    <div className="item-label">
                       <strong>Ciudad</strong>
                     </div>
-                    <div class="item-data">Bogotá D.C</div>
+                    <div className="item-data">Bogotá D.C</div>
                   </div>
-                  <div class="col text-end">
-                    <a class="btn-sm btn-secondary" href="#">
+                  <div className="col text-end">
+                    <Link className="btn-sm btn-secondary" to="#">
                       Change
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-12 col-lg-6">
-          <div class="card card-account shadow-sm d-flex flex-column align-items-start">
-            <div class="card-header p-3 border-bottom-0">
-              <div class="row align-items-center gx-3">
-                <div class="col-auto">
-                  <div class="icon-holder"></div>
+        <div className="col-12 col-lg-6">
+          <div className="card card-account shadow-sm d-flex flex-column align-items-start">
+            <div className="card-header p-3 border-bottom-0">
+              <div className="row align-items-center gx-3">
+                <div className="col-auto">
+                  <div className="icon-holder"></div>
                 </div>
-                <div class="col-auto">
-                  <h4 class="card-title">Security</h4>
+                <div className="col-auto">
+                  <h4 className="card-title">Security</h4>
                 </div>
               </div>
             </div>
-            <div class="card-body px-4 w-100">
-              <div class="item border-bottom py-3">
-                <div class="row justify-content-between align-items-center">
-                  <div class="col-auto">
-                    <div class="item-label">
+            <div className="card-body px-4 w-100">
+              <div className="item border-bottom py-3">
+                <div className="row justify-content-between align-items-center">
+                  <div className="col-auto">
+                    <div className="item-label">
                       <strong>Password</strong>
                     </div>
-                    <div class="item-data">••••••••</div>
+                    <div className="item-data">••••••••</div>
                   </div>
-                  <div class="col text-end">
-                    <a class="btn-sm btn-secondary" href="#">
+                  <div className="col text-end">
+                    <Link className="btn-sm btn-secondary" to="#">
                       Change
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
-              <div class="item py-3">
-                <div class="row justify-content-between align-items-center">
-                  <div class="col-auto">
-                    <div class="item-label">
+              <div className="item py-3">
+                <div className="row justify-content-between align-items-center">
+                  <div className="col-auto">
+                    <div className="item-label">
                       <strong>Two-Factor Authentication</strong>
                     </div>
-                    <div class="item-data">
+                    <div className="item-data">
                       You haven't set up two-factor authentication.{" "}
                     </div>
                   </div>
-                  <div class="col text-end">
-                    <a class="btn-sm btn-secondary" href="#">
+                  <div className="col text-end">
+                    <Link className="btn-sm btn-secondary" to="#">
                       Set up
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>

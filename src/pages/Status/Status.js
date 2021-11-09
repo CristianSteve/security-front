@@ -4,6 +4,7 @@ import { faArrowDown, faHistory, faDoorOpen, faWindowRestore } from "@fortawesom
 
 import styled from "styled-components";
 import "./status.scss";
+import useAuth from "../../Hooks/useAuth";
 
 const Access = styled.div`
   display: flex;
@@ -12,11 +13,12 @@ const Access = styled.div`
 `;
 
 const Status = () => {
+  const { user } = useAuth();
   return (
     <div className="dash">
       <p className="dash__title">DashBoard</p>
       <div className="dash__intro">
-        <p>Bienvenido, Cristian Steve </p>
+        <p>Bienvenido, {user.nombre} </p>
         <span>Este portal esta diseñado para administrar los accesos de tu area privada. Recuerda que puedes acceder tabien desde tus dispositivos moviles, donde recibiras las notificaciones y alertas generadas por tu area </span>
       </div>
       <Access>

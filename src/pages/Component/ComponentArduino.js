@@ -1,5 +1,5 @@
 import React from "react";
-import {Input} from "../../components/Input";
+import {InputFloating, InputSelect} from "../../components/Input";
 import { useForm } from "../../Hooks/useForm";
 
 
@@ -12,10 +12,11 @@ const ComponentArduino = () => {
   return (
     <div className="container">
         <form onSubmit={handleSubmitComponent}>
-            <Input placeholder="Nombre Componente" nameComponent="nombre" value={nombre} handleChange={handleInputChange}/>
-            <Input placeholder="Componente" nameComponent="componente" value={componente} handleChange={handleInputChange}/>
-            <Input placeholder="Tipo" nameComponent="tipo" value={tipo} handleChange={handleInputChange}/>
-            <Input placeholder="Estado" nameComponent="estado" value={estado} handleChange={handleInputChange}/>
+            <InputSelect nameComponent="tipo" value={tipo} handleChange={handleInputChange}/>
+            <InputFloating placeholder="Nombre Componente" nameComponent="nombre" value={nombre} handleChange={handleInputChange}/>
+            <InputFloating placeholder="Componente" nameComponent="componente" value={componente} handleChange={handleInputChange}/>
+            <InputFloating placeholder="Estado" nameComponent="estado" value={estado} handleChange={handleInputChange}/>
+            <button className="btn btn-success mt-5 px-5 py-2" type="submit">Crear</button>
         </form>
     </div>
   );
