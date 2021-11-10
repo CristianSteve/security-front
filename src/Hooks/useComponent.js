@@ -25,6 +25,7 @@ export const useComponent = () => {
         }
       },) 
       .then((data) => {
+        console.log("Se ha consumido exitosamente findComponent", data)
         setResponse({
           data : data.data.data,
           loading: false,
@@ -32,8 +33,9 @@ export const useComponent = () => {
         });
       })
       .catch((error) => {
-        if(error.response.status === 409)
-          setResponse({ dataH: null, loading: false, error : error.response.data.description });
+        console.log("Se ha generado un error en findComponent", error)
+        if(error?.response?.status === 409)
+          setResponse({ dataH: null, loading: false, error : error?.response?.data?.description });
         else
           setResponse({ dataH: null, loading: false, error });
       });
@@ -63,7 +65,7 @@ export const useComponent = () => {
       })
       .catch((error) => {
         if(error.response.status === 409)
-          setResponse({ dataH: null, loading: false, error : error.response.data.description });
+          setResponse({ dataH: null, loading: false, error : error?.response?.data?.description });
         else
           setResponse({ dataH: null, loading: false, error });
       });

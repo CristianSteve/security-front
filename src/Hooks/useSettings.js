@@ -49,5 +49,11 @@ export const useSettings = () => {
       });
   },[user.token])
 
-  return { dataConf, loadingConf, errorConf, listConfig, modifySettings }
+  const setDefaultValues = () =>{
+    setDataConf(null)
+    setLoadingConf(true)
+    setErrorConf(null)
+  }
+
+  return { dataConf, loadingConf, errorConf, listConfig, modifySettings, setDefaultValues }
 };

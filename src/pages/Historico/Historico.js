@@ -16,8 +16,8 @@ const Historico = () => {
   const { isError, message } = errorModal;
 
   const isErrorReset = () => setErrorModal({ isError: false, message: "" });
-  const { response: { dataH, loadingH, errorH }} = useHistory();
-  const { response: { data, error }} = useComponent();
+  const { response: { dataH, loadingH, errorH }, findHistory} = useHistory();
+  const { response: { data, loading, error }} = useComponent();
 
   useEffect(() => {
     if(errorH)
@@ -28,11 +28,17 @@ const Historico = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(!calendar)
+    if(!calendar){
       setErrorModal({isError: true, message : "No se informo el calendario"});
+      return
+    }
 
-    if(!component || component === "Seleccionar")
+/*     if(!component || component === "Seleccionar"){
       setErrorModal({isError: true, message : "No se informo el input"});
+      return
+    } */
+
+    findHistory({date : calendar, type: component})
 
   };
 
@@ -76,12 +82,12 @@ const Historico = () => {
               </tr>
             </thead>
             <tbody>
-            {!loadingH && !errorH &&(
+            {!loadingH && !errorH && !error && !loading && (
               <>
               {dataH.map((h) => (
                 <tr key={h.id}>
                   <th scope="row">{h.id}</th>
-                  <td>{h.Componente_idComponente}</td>
+                  {<td>{data.find((i) => h.Componente_idComponente === i.id).nombre}</td>}
                   <td>{h.createdAt.substring(0,10)}</td>
                   <td>{h.usuario}</td>
                   <td>{h.descripcion}</td>

@@ -16,7 +16,7 @@ const Settings = () => {
   const { email, whatsapp, push, estado, apertura, cerrar, acceso, perfil } = values;
   const [notify, alert] = subTitle;
 
-  const { dataConf, loadingConf, listConfig, modifySettings } = useSettings();
+  const { dataConf, loadingConf, listConfig, modifySettings, setDefaultValues } = useSettings();
 
   const {user} = useAuth()
 
@@ -30,11 +30,13 @@ const Settings = () => {
 
   const handleSubmitNotify = (e) =>{
     e.preventDefault();
+    setDefaultValues();
     modifySettings({...dataConf, email, whatsapp, push});
   }
 
   const handleSubmitAlert = (e) =>{
     e.preventDefault();
+    setDefaultValues();
     modifySettings({...dataConf, estado, apertura, cerrar, acceso, perfil});
   }
   return (
