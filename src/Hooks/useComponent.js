@@ -1,75 +1,81 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import useAuth from "./useAuth";
 
 export const useComponent = () => {
   const { user } = useAuth();
-  const [response, setResponse] = useState({
-    data: [],
-    loading: true,
-    isError: false,
-  });
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
 
-  useEffect(() => {
-    const token = user.token
-    findComponent(token);
-  }, [user.token]);
-
-
-  const findComponent = async (token) => {
+  const findComponent = useCallback(async () => {
     await axios
       .get("http://192.168.1.58:4000/api/component",
       {headers: 
         {
-          'tsec' :  token
+          'tsec' :  user.token
         }
       },) 
       .then((data) => {
         console.log("Se ha consumido exitosamente findComponent", data)
-        setResponse({
-          data : data.data.data,
-          loading: false,
-          error: null,
-        });
+        setData(data.data.data);
+        setLoading(false);
       })
       .catch((error) => {
         console.log("Se ha generado un error en findComponent", error)
         if(error?.response?.status === 409)
-          setResponse({ dataH: null, loading: false, error : error?.response?.data?.description });
+          setIsError(error?.response?.data?.description);
         else
-          setResponse({ dataH: null, loading: false, error });
+          setIsError(error);
       });
-  };
+  },[user.token]);
 
   const createComponent = async (nombre, descripcion, status) => {
     await axios
       .post("http://192.168.1.58:4000/api/component",
+      { nombre, descripcion, status },
       {headers: 
       {
-        'tsec' : 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImNjYXJyaWxsb3NvMSIsImlhdCI6MTYzNjMwOTg4OSwiZXhwIjoxNjM2MzA5OTE5fQ.O7hodDxe2u9DTRHn7dEmtXT8DKSG-LxPZlJwc-g046I'
+        'tsec' : user.token
       }
-    }, 
-    {body: 
-        {
-          nombre,
-          descripcion,
-          status
-        }
-    })
+      })
       .then((data) => {
-        setResponse({
-          data : data.data.data,
-          loading: false,
-          error: null,
-        });
+        setData(data.data.data);
       })
       .catch((error) => {
-        if(error.response.status === 409)
-          setResponse({ dataH: null, loading: false, error : error?.response?.data?.description });
+        if(error?.response?.status === 409)
+          setIsError(error?.response?.data?.description);
         else
-          setResponse({ dataH: null, loading: false, error });
+          setIsError(error);
+      })
+  };
+
+  const updateComponent = async (...item) => {
+    const [data] = item;
+    console.log(data)
+    console.log("Actualizando estado updateComponent ", data.id)
+    await axios
+      .patch("http://192.168.1.58:4000/api/component/"+ data.id,
+      {...data},
+      {headers: 
+        {
+          'tsec' : user.token
+        }
+      })
+      .then((data) => {
+        console.log("Actualizacion correcta", data)
+      })
+      .catch((error) => {
+        if(error?.response?.status === 409)
+          setIsError(error?.response?.data?.description);
+        else
+          setIsError(error);
       });
   };
 
-  return {response, findComponent, createComponent}
+  useEffect(() => {
+    findComponent();
+  }, [findComponent]);
+
+  return {data, loading, isError, findComponent, createComponent, updateComponent}
 };

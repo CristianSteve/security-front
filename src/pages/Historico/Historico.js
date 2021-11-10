@@ -17,7 +17,7 @@ const Historico = () => {
 
   const isErrorReset = () => setErrorModal({ isError: false, message: "" });
   const { response: { dataH, loadingH, errorH }, findHistory} = useHistory();
-  const { response: { data, loading, error }} = useComponent();
+  const { data, loading, error } = useComponent();
 
   useEffect(() => {
     if(errorH)

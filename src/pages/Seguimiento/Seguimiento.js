@@ -1,7 +1,7 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 
-import ContextSocket from "../../Hooks/context-socket";
-import useSocket from "../../Hooks/useSocket";
+/* import ContextSocket from "../../Hooks/context-socket"; */
+/* import useSocket from "../../Hooks/useSocket"; */
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
@@ -11,14 +11,17 @@ import "./seguimiento.scss";
 import ListItem from "../../components/ListItem";
 
 const Seguimiento = () => {
-  const { content : {socketIO} } = useContext(ContextSocket);
-  const [emitServo] = useSocket(socketIO);
+/*   const { content : {socketIO} } = useContext(ContextSocket); */
+  /* const [emitServo] = useSocket(socketIO); */
   const [popInfo, setPopInfo] = useState(false);
 
-  const { response: { data, loading, error } } = useComponent();
+  const { data, loading, error, updateComponent } = useComponent();
 
-  const handleChangeCheck = (flag) => {
-    emitServo(flag ? "C" : "A");
+  const handleChangeCheck = (item) => {
+    console.log(item.id)
+    //console.log(flag, id)
+    updateComponent(item);
+    //emitServo(flag ? "C" : "A");
     setPopInfo(true);
     setTimeout(function () {
       setPopInfo(false);
@@ -44,7 +47,7 @@ const Seguimiento = () => {
         </p>
         <div className="seg__content__list">
           <ol>
-            {!loading && !error &&
+            {!loading && !error && data &&
               data.map((c) => (
                 <ListItem key={c.id} item={c} handleCheck={handleChangeCheck} />
               ))}

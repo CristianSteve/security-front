@@ -18,7 +18,7 @@ const Control = () => {
   const [ emitServo ] = useSocket(socketIO);
 
   const [pop, setPop] = useState(false);
-  const {response: { data, loading }} = useComponent();
+  const { data, loading } = useComponent();
   const [show, setshow] = useState(false);
 
   const handleChangeCheck = (flag) => {

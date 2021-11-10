@@ -104,15 +104,18 @@ const Switch = styled.div`
 const ListItem = ({item, handleCheck = () =>{}}) => {
     const itemRef = useRef({ status: false });
     const [status, setStatus] = useState(false);
+    const [data, setData] = useState(null);
 
     useEffect(() => {
         setStatus(item.status);
+        setData(item);
     }, [item])
 
     const handleChangeSwitch = (e) =>{
-        const flag = e.target.checked;
-        setStatus(flag);
-        handleCheck(flag);
+        const status = e.target.checked;
+/*         const id = e.target.attributes[2].value; */
+        setStatus(status);
+        handleCheck({...data, status});
     }
   return (
     <List ref={itemRef}>

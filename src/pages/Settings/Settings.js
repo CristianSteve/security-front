@@ -16,7 +16,7 @@ const Settings = () => {
   const { email, whatsapp, push, estado, apertura, cerrar, acceso, perfil } = values;
   const [notify, alert] = subTitle;
 
-  const { dataConf, loadingConf, listConfig, modifySettings, setDefaultValues } = useSettings();
+  const { dataConf, loadingConf, errorConf, listConfig, modifySettings, setDefaultValues } = useSettings();
 
   const {user} = useAuth()
 
@@ -52,7 +52,7 @@ const Settings = () => {
           <div className="app-card app-card-settings shadow-sm p-4">
             <div className="app-card-body">
               <form className="settings-form" onSubmit={handleSubmitNotify}>
-                {!loadingConf && dataConf && 
+                {!loadingConf && !errorConf && dataConf && 
                 <>
                   <CheckBox placeholder="Correo electronico" defChecked={dataConf.email} nameComponent="email" handleChange={handleInputChange}/>
                   <CheckBox placeholder="WhatsApp (Facebook)" defChecked={dataConf.whatsapp} nameComponent="whatsapp" handleChange={handleInputChange}/>
@@ -79,7 +79,7 @@ const Settings = () => {
           <div className="app-card app-card-settings shadow-sm p-4">
             <div className="app-card-body">
               <form className="settings-form" onSubmit={handleSubmitAlert}>
-              {!loadingConf && dataConf && 
+              {!loadingConf && !errorConf && dataConf && 
                 <>
                   <CheckBox placeholder="Modificar estado componente" defChecked={dataConf.estado} tSwitch={true} nameComponent="estado" handleChange={handleInputChange}/>
                   <CheckBox placeholder="Aperturar componente" defChecked={dataConf.apertura} tSwitch={true} nameComponent="apertura" handleChange={handleInputChange}/>
