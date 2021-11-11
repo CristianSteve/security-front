@@ -30,10 +30,11 @@ export const useComponent = () => {
       });
   },[user.token]);
 
-  const createComponent = async (nombre, descripcion, status) => {
+  const createComponent = useCallback(async (...rest) => {
+    console.log("Creando componente useComponent" , ...rest)
     await axios
       .post("http://192.168.1.58:4000/api/component",
-      { nombre, descripcion, status },
+      ...rest,
       {headers: 
       {
         'tsec' : user.token
@@ -48,7 +49,7 @@ export const useComponent = () => {
         else
           setIsError(error);
       })
-  };
+  },[user.token]);
 
   const updateComponent = async (...item) => {
     const [data] = item;

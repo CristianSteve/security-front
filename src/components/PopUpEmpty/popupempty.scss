@@ -47,11 +47,10 @@
     }
   }
 }
-
-@media screen and (max-width: 480px){
+@media screen and (max-width: 550px){
   .body__pop {
     width: 95vw;
-    height: 95vh;
+    height: 80vh;
     padding: 1rem;
   }
 }

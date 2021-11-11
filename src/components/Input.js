@@ -23,6 +23,7 @@ export const Input = ({
         placeholder={placeholder}
         value={value}
         onChange={handleChange}
+        autocomplete="off"
       />
     </div>
   );
@@ -45,6 +46,7 @@ export const InputFloating = ({
         className={`form-control ${isInvalid && "is-invalid"}`}
         value={value}
         onChange={handleChange}
+        autocomplete="off"
       />
       <label>{placeholder}</label>
     </div>
@@ -59,7 +61,7 @@ export const InputSelect = ({
   handleChange = () => {},
 }) => {
   return (
-    <div className="col-sm-3 mb-3">
+    <div className="col-sm-4 mb-3">
       <label className={`${!placeholder && "visually-hidden"}`}>
         {placeholder}
       </label>

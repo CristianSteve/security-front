@@ -2,6 +2,7 @@ import { useCallback, useState } from "react";
 const CHECKBOX = "checkbox";
 
 export const useForm = (initialState = {}) => {
+	console.log("initialstst: ", initialState)
 	const [values, setValues] = useState(initialState);
 
 	const handleInputChange = ({ target }) => {
@@ -22,6 +23,7 @@ export const useForm = (initialState = {}) => {
 	},[])
 
 	const resetInput = () =>{
+		console.log("---->",initialState)
 		setValues(initialState)
 	} 
 
