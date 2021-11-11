@@ -6,6 +6,18 @@ const Card = styled.div`
   height: 260px;
   width: 210px;
   box-shadow: 1px 2px 5px #ccc;
+  border-radius: 6px;
+  overflow: hidden;
+
+  @media (max-width: 620px) {
+    width: calc(45vw - 5.5rem)
+  }
+
+  @media (max-width: 500px) {
+      width: 65vw;
+      border-radius: 10px;
+  }
+
 `;
 
 const Head = styled.div`

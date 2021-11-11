@@ -35,27 +35,6 @@ const Profile = () => {
               <div className="item border-bottom py-3">
                 <div className="row justify-content-between align-items-center">
                   <div className="col-auto">
-                    <div className="item-label mb-2">
-                      <strong>Photo</strong>
-                    </div>
-                    <div className="item-data">
-                      <img
-                        className="profile-image"
-                        src="assets/images/user.png"
-                        alt=""
-                      />
-                    </div>
-                  </div>
-                  <div className="col text-end">
-                    <Link className="btn-sm btn-secondary" to="#">
-                      Change
-                    </Link>
-                  </div>
-                </div>
-              </div>
-              <div className="item border-bottom py-3">
-                <div className="row justify-content-between align-items-center">
-                  <div className="col-auto">
                     <div className="item-label">
                       <strong>Name</strong>
                     </div>
@@ -113,13 +92,28 @@ const Profile = () => {
                   </div>
                 </div>
               </div>
-              <div className="item py-3">
+              <div className="item border-bottom py-3">
                 <div className="row justify-content-between align-items-center">
                   <div className="col-auto">
                     <div className="item-label">
                       <strong>Ciudad</strong>
                     </div>
                     <div className="item-data">Bogotá D.C</div>
+                  </div>
+                  <div className="col text-end">
+                    <Link className="btn-sm btn-secondary" to="#">
+                      Change
+                    </Link>
+                  </div>
+                </div>
+              </div>
+              <div className="item py-3">
+                <div className="row justify-content-between align-items-center">
+                  <div className="col-auto">
+                    <div className="item-label">
+                      <strong>Celular</strong>
+                    </div>
+                    <div className="item-data">3008688677</div>
                   </div>
                   <div className="col text-end">
                     <Link className="btn-sm btn-secondary" to="#">

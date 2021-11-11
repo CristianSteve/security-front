@@ -41,8 +41,8 @@ const Settings = () => {
   }
   return (
     <div className="container">
-      <h1 className="app-page-title">Configuraciones</h1>
-      <hr className="mb-4 mt-3 mb-2" />
+      <h1 className="page-title">Configuraciones</h1>
+      <hr className="mb-5 mt-3 mb-2" />
       <div className="row g-4 settings-section">
         <div className="col-12 col-md-4">
           <h3 className="section-title">{notify.title}</h3>

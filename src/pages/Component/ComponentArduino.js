@@ -78,7 +78,7 @@ const ComponentArduino = () => {
             {!loadingType && dataType && !isErrorType &&
             <InputSelect placeholder="Tipo Componente" nameComponent="Tipo_idComponente" value={Tipo_idComponente} handleChange={handleInputChange} listOption={dataType}/>
             }
-            <InputFloating placeholder="Numero del Input/OSutput Digital" nameComponent="entrada" value={entrada} handleChange={handleInputChange} type="number"/>
+            <InputFloating placeholder="Numero Input/Output Digital" nameComponent="entrada" value={entrada} handleChange={handleInputChange} type="number"/>
             <InputFloating placeholder="Icono" nameComponent="icon" value={icon} handleChange={handleInputChange}/>
             <InputFloating placeholder="Nombre Componente" nameComponent="nombre" value={nombre} handleChange={handleInputChange}/>
             <InputFloating placeholder="Descripción" nameComponent="descripcion" value={descripcion} handleChange={handleInputChange}/>

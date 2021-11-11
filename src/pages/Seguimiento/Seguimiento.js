@@ -31,7 +31,7 @@ const Seguimiento = () => {
   return (
     <div className="seg__primary">
       <h2>Estado de la zona privada</h2>
-      <hr />
+      <hr className="mb-5 mt-3 mb-2" />
       <div className="seg__content">
         <div className="seg__content__status">
           <p>

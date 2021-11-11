@@ -102,7 +102,7 @@ export const MenuDash = ({ children }) => {
               </Link>
               <span className="tooltip_dash">{item.title}</span>
               {!!item?.subitem && (
-                <ul>
+                <ul className="sub-item">
                   {item.subitem.map((sub, i) => (
                     <li key={i}>
                       <Link to={sub.enlace}>
@@ -121,7 +121,7 @@ export const MenuDash = ({ children }) => {
           <div className="profile">
             <div className="profile_details">
               <Link to="/profile">
-                <img src="" alt="" />
+                <img src="https://i.ibb.co/z4bDXz8/Logo.jpg" alt="profile" />
               </Link>
               <div className="name_job">
                 <div className="name">{user.username}</div>

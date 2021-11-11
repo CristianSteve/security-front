@@ -32,7 +32,7 @@ const Control = () => {
   return (
     <div className="cont__control">
       <h2>Control de Componentes</h2>
-      <hr />
+      <hr className="mb-5 mt-3 mb-2" />
       {!loading && 
         <div className="content__card">
           {data.map((c) => (
