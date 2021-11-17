@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import CardComponent from "../../components/CardComponent";
 import PopUpEmpty from "../../components/PopUpEmpty/PopUpEmpty";
@@ -10,11 +10,20 @@ import { faPlus, faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 import ComponentArduino from "../Component/ComponentArduino";
 import { useComponent } from "../../Hooks/useComponent";
 
+import Aos from "aos";
+import "aos/dist/aos.css";
 import "./control.scss";
+import { useHistory } from "../../Hooks/useHistory";
+
+const message = {
+  open : "Se ha generado una apertura desde el aplicativo web", 
+  close : "Se ha realizado el cierre desde el aplicativo web"
+}
 
 const Control = () => {
 
   const { content : {socketIO} } = useContext(ContextSocket);
+  const { createHistory } = useHistory();
   const [ emitServo ] = useSocket(socketIO);
 
   const [pop, setPop] = useState(false);
@@ -22,25 +31,32 @@ const Control = () => {
   const [show, setshow] = useState(false);
 
   const handleChangeCheck = (flag) => {
-    emitServo((flag.target.checked)?"C":"A");
+    const open = flag.target.checked;
+    const Componente_idComponente = flag.target.id;
+    const descripcion = open ? message.open : message.close;
+
+    emitServo((open)?"C":"A");
+
+    createHistory({descripcion, Componente_idComponente});
     setPop(true);
     setTimeout(function(){
       setPop(false);
     }, 2000);
   }
 
+  useEffect(() => {
+    Aos.init({ duration: 2000 });
+  }, []);
+
   return (
     <div className="cont__control">
       <h2>Control de Componentes</h2>
       <hr className="mb-5 mt-3 mb-2" />
       {!loading && 
-        <div className="content__card">
+        <div className="content__card" data-aos="fade-up">
           {data.map((c) => (
-            <CardComponent key={c.id} nameComponent={c.nombre}created={c.createdAt.substring(0,10)} statusComponent={c.status} iconComponent={faQuestionCircle} eventClick={handleChangeCheck}/>  
+            <CardComponent key={c.id} idComponent={c.id} nameComponent={c.nombre}created={c.createdAt.substring(0,10)} statusComponent={c.status} iconComponent={faQuestionCircle} eventClick={handleChangeCheck}/>  
           ))}
-{/*           <CardComponent nameComponent="Puerta Balcon" created="2021-01-01" statusComponent={true} iconComponent={faDoorOpen} eventClick={handleChangeCheck}/>
-          <CardComponent nameComponent="Vetana Alcoba" created="2021-01-01" statusComponent={true} iconComponent={faWindowMaximize} eventClick={handleChangeCheck}/>
-          <CardComponent nameComponent="Puerta Pricipal" created="2021-01-01" statusComponent={false} iconComponent={faDoorOpen} eventClick={handleChangeCheck}/> */}
           <CardComponent nameComponent="Nuevo Componente" iconComponent={faPlus} newComponent={true} eventComponent={()=>{setshow(!show)}}/>
         </div>
       }

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { CheckBox } from '../../components/Input'
+import { CheckBox, InputFloating } from '../../components/Input'
 import useAuth from "../../Hooks/useAuth";
 import { useForm } from "../../Hooks/useForm";
 import { useSettings } from "../../Hooks/useSettings";
@@ -7,14 +7,15 @@ import { useSettings } from "../../Hooks/useSettings";
 const subTitle = [
   {title : "Notificaciones", desc : "Medio para el envío de las alertas."},
   {title : "Alertas", desc : "Esta sección podrás habilitar el envío de los eventos sucedidos en tu aplicación o área privada."},
+  {title : "Usurios", desc : "Enviar código para crear cuenta en el area privada."},
 ]
 
 const Settings = () => {
 
   const [values, handleInputChange, handlePushState] = useForm({email: false, whatsapp: false, push: false, 
-         estado : false, apertura: false, cerrar: false, acceso: false, perfil: false});
-  const { email, whatsapp, push, estado, apertura, cerrar, acceso, perfil } = values;
-  const [notify, alert] = subTitle;
+         estado : false, apertura: false, cerrar: false, acceso: false, perfil: false, emailNew : ""});
+  const { email, whatsapp, push, estado, apertura, cerrar, acceso, perfil, emailNew } = values;
+  const [notify, alert, userNew] = subTitle;
 
   const { dataConf, loadingConf, errorConf, listConfig, modifySettings, setDefaultValues } = useSettings();
 
@@ -90,6 +91,27 @@ const Settings = () => {
                 <div className="mt-3">
                   <button type="submit" className="btn btn-primary">
                     Guardar
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr className="my-4" />
+      <div className="row g-4 settings-section">
+        <div className="col-12 col-md-4">
+          <h3 className="section-title">{userNew.title}</h3>
+          <div className="section-intro mt-2">{userNew.desc}</div>
+        </div>
+        <div className="col-12 col-md-8">
+          <div className="app-card app-card-settings shadow-sm p-4">
+            <div className="app-card-body">
+              <form className="settings-form" onSubmit={handleSubmitAlert}>
+                <InputFloating placeholder="Email" value={emailNew} nameComponent="emailNew" handleChange={handleInputChange}/>
+                <div className="mt-3">
+                  <button type="submit" className="btn btn-primary">
+                    Enviar
                   </button>
                 </div>
               </form>

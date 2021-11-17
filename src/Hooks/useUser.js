@@ -1,10 +1,12 @@
 import { useState } from "react";
 import axios from "axios";
+import useAuth from "./useAuth";
 
 export const useUser = () => {
   const [dataUser, setDataUser] = useState(null);
   const [loadingUser, setLoadingUser] = useState(true);
   const [errorUser, setErrorUser] = useState(null);
+  const { user } = useAuth();
 
   const RegisterUser = async (username, email, name, password) => {
     await axios
@@ -47,5 +49,26 @@ export const useUser = () => {
       });
   };
 
-  return { dataUser, loadingUser, errorUser, RegisterUser, createToken }
+  const setCodeUser = async (emailReceptor, emailEmisor = "", status = true) => {
+    console.log("Ejecutando email de useUser", {emailReceptor, emailEmisor, status, token : user.token})
+    await axios
+      .post("http://192.168.1.58:4000/api/user/code",
+      { emailReceptor, emailEmisor, status },
+      {headers: 
+        {
+          'tsec' : user.token
+        }
+      }
+      )
+      .then((data) => {
+        setDataUser(data.data.data)
+        setLoadingUser(false)
+      })
+      .catch((errorUser) => {
+        setErrorUser(errorUser)
+        setLoadingUser(false)
+      });
+  };
+
+  return { dataUser, loadingUser, errorUser, RegisterUser, createToken, setCodeUser}
 };

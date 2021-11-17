@@ -7,10 +7,11 @@ export const Input = ({
   placeholder = "",
   value = "",
   type = "text",
+  className = "",
   handleChange = () => {},
 }) => {
   return (
-    <div className="input-group mb-3">
+    <div className={`input-group mb-3 ${className}`}>
       {icon && (
         <span className="input-group-text" id={nameComponent}>
           <FontAwesomeIcon icon={icon} />
@@ -23,7 +24,7 @@ export const Input = ({
         placeholder={placeholder}
         value={value}
         onChange={handleChange}
-        autocomplete="off"
+        autoComplete="off"
       />
     </div>
   );
@@ -35,10 +36,11 @@ export const InputFloating = ({
   value = "",
   type = "text",
   isInvalid = false,
+  textError = "",
   handleChange = () => {},
 }) => {
   return (
-    <div className="form-floating mt-3">
+    <div className="form-floating mt-3 has-validation">
      <input
         type={type}
         placeholder={placeholder}
@@ -46,9 +48,12 @@ export const InputFloating = ({
         className={`form-control ${isInvalid && "is-invalid"}`}
         value={value}
         onChange={handleChange}
-        autocomplete="off"
+        autoComplete="off"
       />
       <label>{placeholder}</label>
+      <div className="invalid-feedback px-2">
+        {textError}
+      </div>
     </div>
   );
 };

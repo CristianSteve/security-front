@@ -14,6 +14,8 @@ import {
   faHistory,
   faLockOpen,
   faCogs,
+  faUserCircle,
+  faUserNinja,
 } from "@fortawesome/free-solid-svg-icons";
 
 import "./menudash.scss";
@@ -40,6 +42,11 @@ export const MenuDash = ({ children }) => {
       title: "DashBoard",
       icon: faChartLine,
       enlace: "/status",
+    },
+    {
+      title: "Administrador",
+      icon: faUserNinja,
+      enlace: "/administrador",
     },
     {
       title: "Configuraciones",
@@ -133,6 +140,11 @@ export const MenuDash = ({ children }) => {
                 <FontAwesomeIcon icon={faSignOutAlt} />
               </div>
             </button>
+          </div>
+          <div className="profile_float">
+            <Link to="/profile">
+              <FontAwesomeIcon icon={faUserCircle} />
+            </Link>
           </div>
         </div>
       </div>

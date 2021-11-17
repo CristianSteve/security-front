@@ -53,7 +53,7 @@ const Body = styled.div`
   }
 `;
 
-const CardComponent = ({nameComponent, created, statusComponent, iconComponent, newComponent=false, eventClick=()=>{}, eventComponent =()=>{}}) => {
+const CardComponent = ({idComponent, nameComponent, created, statusComponent, iconComponent, newComponent=false, eventClick=()=>{}, eventComponent =()=>{}}) => {
   return (
     <Card>
       <Head onClick={eventComponent}>
@@ -72,7 +72,7 @@ const CardComponent = ({nameComponent, created, statusComponent, iconComponent, 
           <li className="ult">
             <span>Abrir/Cerrar </span>
             <div className="form-check form-switch ms-2">
-              <input className="form-check-input" type="checkbox" disabled={!statusComponent} onChange={eventClick} />
+              <input id={idComponent} className="form-check-input" type="checkbox" disabled={!statusComponent} onChange={eventClick} />
             </div>
           </li>
         </ol>

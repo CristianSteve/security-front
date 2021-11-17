@@ -262,10 +262,53 @@
     border-radius: 12px;
     cursor: pointer;
     text-align: center;
+    background-color: #fff;
+    color: #000;
+    transition: all 0.5s ease;
 }
 
 .sidebar.active .profile #logOut{
     left: 88%;
+    a{
+        color: #fff;
+        text-decoration: none;
+    }
+    color: #fff;
+    background-color: transparent;
+}
+.sidebar .profile_content .profile_float {
+    position: fixed;
+    top:20px;
+    right: 40px;
+    color: #0b5ed7;
+    z-index: 1;
+    svg{
+        cursor: pointer;
+        font-size: 2.5rem;
+    }
+
+    &:hover::after{
+        opacity: 1;
+    }
+    
+    &::after{
+        content : "Ver perfil";
+        position: absolute;
+        font-size: 0.885rem;
+        left: -3.5rem;
+        color: #fff;
+        padding: 3px;
+        border-radius: 10px;
+        transform: translate(-50%, -50%);
+        width: 122px;
+        background-color: rgba(17, 16, 29, 0.66);
+        line-height: 30px;
+        text-align: center;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+        display: block;
+        opacity: 0;
+        transition: all 1s ease;
+    }
 }
 
 .content__primary{

@@ -70,18 +70,25 @@ const Historico = () => {
           <button className="btn btn-primary" type="submit">Buscar </button>
         </div>
       </form>
-      <div className="mt-5">
-          <table className="table table-striped table-hover">
-            <thead className="table-dark">
+      <div className="container mt-5 app-table">
+          <div className="app-header">
+            <div className="app-icon">
+              <span>icono</span>
+            </div>
+            <h4 className="app-title">Registros</h4>
+          </div>
+          <div className="app-table-list table-responsive">
+          <table className="table table-hover">
+            <thead className="app-table-list-header">
               <tr>
-                <th scope="col">#</th>
+                <th scope="col">ID</th>
                 <th scope="col">Componente</th>
                 <th scope="col">Fecha/Hora</th>
                 <th scope="col">Usuario</th>
                 <th scope="col">Descripción</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="app-table-list-body">
             {!loadingH && !errorH && !error && !loading && (
               <>
               {dataH.map((h) => (
@@ -97,6 +104,7 @@ const Historico = () => {
             )}
             </tbody>
           </table>
+          </div>
       </div>
     </div>
   );
