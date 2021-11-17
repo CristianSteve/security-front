@@ -1,27 +1,22 @@
 import React, { useState } from "react";
-
-/* import ContextSocket from "../../Hooks/context-socket"; */
-/* import useSocket from "../../Hooks/useSocket"; */
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { useComponent } from "../../Hooks/useComponent";
+import { useHistory } from "../../Hooks/useHistory";
 
-import "./seguimiento.scss";
 import ListItem from "../../components/ListItem";
+import "./seguimiento.scss";
 
 const Seguimiento = () => {
-/*   const { content : {socketIO} } = useContext(ContextSocket); */
-  /* const [emitServo] = useSocket(socketIO); */
-  const [popInfo, setPopInfo] = useState(false);
-
+  const [ popInfo, setPopInfo ] = useState(false);
+  const { createHistory } = useHistory();
   const { data, loading, error, updateComponent } = useComponent();
 
   const handleChangeCheck = (item) => {
-    console.log(item.id)
-    //console.log(flag, id)
+    const descripcion = item.status ? "Se habilito el componente" : "Se deshabilito el componente";
+    const Componente_idComponente = item.id;
+    createHistory({descripcion, Componente_idComponente});
     updateComponent(item);
-    //emitServo(flag ? "C" : "A");
     setPopInfo(true);
     setTimeout(function () {
       setPopInfo(false);

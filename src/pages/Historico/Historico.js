@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Input, InputSelect } from "../../components/Input";
 import { useForm } from "../../Hooks/useForm";
-import { faCalendar } from "@fortawesome/free-solid-svg-icons";
+import { faCalendar, faHistory, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { useHistory } from "../../Hooks/useHistory";
 
-import "./historico.scss";
 import { useComponent } from "../../Hooks/useComponent";
 import { ModalAlert } from "../../components/ModalAlert";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import "./historico.scss";
 
 const Historico = () => {
   const [ values, handleInputChange ] = useForm({ calendar: "", component: "" });
@@ -32,14 +34,7 @@ const Historico = () => {
       setErrorModal({isError: true, message : "No se informo el calendario"});
       return
     }
-
-/*     if(!component || component === "Seleccionar"){
-      setErrorModal({isError: true, message : "No se informo el input"});
-      return
-    } */
-
     findHistory({date : calendar, type: component})
-
   };
 
   return (
@@ -67,13 +62,13 @@ const Historico = () => {
           />
         }
         <div className="col-auto">
-          <button className="btn btn-primary" type="submit">Buscar </button>
+          <button className="btn btn-primary app-send" type="submit"><FontAwesomeIcon icon={faSearch} /> Buscar</button>
         </div>
       </form>
       <div className="container mt-5 app-table">
           <div className="app-header">
             <div className="app-icon">
-              <span>icono</span>
+              <FontAwesomeIcon icon={faHistory} />
             </div>
             <h4 className="app-title">Registros</h4>
           </div>

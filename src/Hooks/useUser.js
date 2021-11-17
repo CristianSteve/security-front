@@ -50,7 +50,6 @@ export const useUser = () => {
   };
 
   const setCodeUser = async (emailReceptor, emailEmisor = "", status = true) => {
-    console.log("Ejecutando email de useUser", {emailReceptor, emailEmisor, status, token : user.token})
     await axios
       .post("http://192.168.1.58:4000/api/user/code",
       { emailReceptor, emailEmisor, status },

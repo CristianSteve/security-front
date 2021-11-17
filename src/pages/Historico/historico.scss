@@ -8,6 +8,16 @@
       0px 0px 5px #ebebeb, 0px 0px 5px #ebebeb;
   }
 
+  .app-send{
+    overflow: hidden;
+    svg{
+      transform: translateX(-50px);
+      transition: transform 0.2s ease;
+    }
+    &:hover svg{
+      transform: translateX(-2px);
+    }
+  }
   .app-table{
     border-radius: 6px;
     background-color: #fff;
@@ -19,6 +29,7 @@
     .app-header{
       .app-icon{
         border-radius: 3px;
+        font-size: 1.5rem;
         background-color: #275c89;
         color: #fff;
         padding: 15px;
