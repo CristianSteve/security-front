@@ -8,16 +8,12 @@ export const useUser = () => {
   const [errorUser, setErrorUser] = useState(null);
   const { user } = useAuth();
 
-  const RegisterUser = async (username, email, name, password) => {
+  const RegisterUser = async (...values) => {
+    console.log(...values)
     await axios
       .post("http://192.168.1.58:4000/api/user",
-        { username, email, name, password },
-        {headers: 
-          {
-            'tsec' : 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImNjYXJyaWxsb3NvMSIsImlhdCI6MTYzNjMwOTg4OSwiZXhwIjoxNjM2MzA5OTE5fQ.O7hodDxe2u9DTRHn7dEmtXT8DKSG-LxPZlJwc-g046I'
-          }
-        }, 
-        )
+        ...values,
+      )
       .then((data) => {
         setDataUser({
           dataUser: data.data.data.history,
@@ -26,8 +22,8 @@ export const useUser = () => {
         });
       })
       .catch((errorUser) => {
-        if(errorUser.response.status === 409)
-          setDataUser({ dataUser: null, loadingUser: false, errorUser : errorUser.response.data.description });
+        if(errorUser?.response?.status === 409)
+          setDataUser({ dataUser: null, loadingUser: false, errorUser : errorUser?.response?.data?.description });
         else
           setDataUser({ dataUser: null, loadingUser: false, errorUser });
       });
@@ -49,7 +45,7 @@ export const useUser = () => {
       });
   };
 
-  const setCodeUser = async (emailReceptor, emailEmisor = "", status = true) => {
+  const setCodeUser = async ({emailReceptor, emailEmisor = "", status = true}) => {
     await axios
       .post("http://192.168.1.58:4000/api/user/code",
       { emailReceptor, emailEmisor, status },

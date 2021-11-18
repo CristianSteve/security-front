@@ -1,7 +1,8 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { InputFloating } from '../../components/Input'
 import { useForm } from '../../Hooks/useForm';
+import { useUser } from '../../Hooks/useUser';
 import  signup  from './signup.svg';
 
 const SignUp = () => {
@@ -10,6 +11,7 @@ const SignUp = () => {
 	const {username, nombre, email, celular, direccion, password, code, tyc } = values;
 	const refForm = useRef(null);
 	let refSend = useRef(0);
+	const { errorUser, dataUser, RegisterUser} = useUser();
 
 	const handleSubmitUser = (e) =>{
 		e.preventDefault();
@@ -33,11 +35,12 @@ const SignUp = () => {
 		}
 		if(numberNext === 2){
 			isError = validate(...code);
-			if(!isError)
-			if(!tyc){ alert("No acepto terminos y condiciones"); isError = true}
+			if(!isError){
+				if(!tyc){ alert("No acepto terminos y condiciones"); return}
+				RegisterUser(values);
+			}
 		}
-		console.log(numberNext)
-		if(!isError)
+		if(!isError && numberNext < 2)
 			refSend.current = numberNext + 1;
 	}
 
@@ -53,6 +56,12 @@ const SignUp = () => {
 		return isError;
 	}
 
+	useEffect(() => {
+		if(errorUser)
+			alert("se ha generado error")
+		if(dataUser)
+			alert("ok")
+	}, [errorUser, dataUser])
     return (
         <div className="row g-0 d-flex align-items-center">
 	    <div className="col-12 col-md-12 col-lg-6 text-center p-5">

@@ -63,6 +63,7 @@ export const InputSelect = ({
   nameComponent,
   placeholder = "",
   value = "",
+  valueDefault = "Seleccionar",
   handleChange = () => {},
 }) => {
   return (
@@ -76,7 +77,7 @@ export const InputSelect = ({
         value={value}
         onChange={handleChange}
       >
-        <option defaultValue>Seleccionar</option>
+        <option defaultValue>{valueDefault}</option>
         {listOption.map((list) => (
           <option key={list.id} value={list.id}>{list.nombre}</option>
         ))}

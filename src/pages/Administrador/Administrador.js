@@ -1,18 +1,24 @@
-import React from "react";
-import { InputFloating } from "../../components/Input";
+import React, {useState} from "react";
+import { InputFloating, InputSelect } from "../../components/Input";
+import Notification from "../../components/Notification";
+import { useComponent } from "../../Hooks/useComponent";
 import { useForm } from "../../Hooks/useForm";
 import { useUser } from "../../Hooks/useUser";
 
 const Administrador = () => {
-  const [ values, handleInputChange ] = useForm({ emailNew: "" });
+  const [ values, handleInputChange, ,resetInput ] = useForm({ area : "", emailReceptor: "" });
   const { setCodeUser} = useUser();
-  const { emailNew } = values;
-
+  const { area, emailReceptor } = values;
+  const { data, loading } = useComponent();
+  const [notificacion, setNotificacion] = useState({});
+  const {type, message, show} = notificacion;
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(!emailNew)
-        return;
-    setCodeUser(emailNew);
+    if(!emailReceptor || !area)
+    return;
+    setCodeUser(values);
+    resetInput();
+    setNotificacion({message : "Correo Electronico enviado correctamente", type : "success", show : true})
   };
 
   return (
@@ -26,14 +32,25 @@ const Administrador = () => {
         </div>
         <div className="col-12 col-md-8">
           <div className="app-card app-card-settings shadow-sm p-4">
-            <div className="app-card-body">
+            <div className="app-card-body mt-4">
               <form className="settings-form" onSubmit={handleSubmit}>
-                <InputFloating
-                  placeholder="Email"
-                  value={emailNew}
-                  nameComponent="emailNew"
+                {!loading && data &&
+                <InputSelect
+                  listOption={data}
+                  valueDefault="Area"
+                  value={area}
+                  nameComponent="area"
                   handleChange={handleInputChange}
                 />
+                }
+                <div className="app-card-body">
+                  <InputFloating
+                    placeholder="Email"
+                    value={emailReceptor}
+                    nameComponent="emailReceptor"
+                    handleChange={handleInputChange}
+                  />
+                </div>
                 <div className="mt-3">
                   <button type="submit" className="btn btn-primary">
                     Enviar
@@ -44,6 +61,9 @@ const Administrador = () => {
           </div>
         </div>
       </div>
+      <Notification type={type} message={message} show={show} 
+        onHide={ () => setNotificacion({...notificacion, show : false})}
+      />
     </div>
   );
 };
