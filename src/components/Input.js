@@ -79,7 +79,7 @@ export const InputSelect = ({
       >
         <option defaultValue>{valueDefault}</option>
         {listOption.map((list) => (
-          <option key={list.id} value={list.id}>{list.nombre}</option>
+          <option key={list.id} value={list.id}>{list.descripcion}</option>
         ))}
       </select>
     </div>

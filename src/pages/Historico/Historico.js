@@ -4,7 +4,7 @@ import { useForm } from "../../Hooks/useForm";
 import { faCalendar, faHistory, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { useHistory } from "../../Hooks/useHistory";
 
-import { useComponent } from "../../Hooks/useComponent";
+import { useAcceso } from "../../Hooks/useAcceso";
 import { ModalAlert } from "../../components/ModalAlert";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -19,14 +19,18 @@ const Historico = () => {
 
   const isErrorReset = () => setErrorModal({ isError: false, message: "" });
   const { response: { dataH, loadingH, errorH }, findHistory} = useHistory();
-  const { data, loading, error } = useComponent();
+  const { dataAcceso, loadingAcceso, errorAcceso } = useAcceso();
+
+  useEffect(() => {
+    findHistory({});
+  }, [findHistory]);
 
   useEffect(() => {
     if(errorH)
       setErrorModal({isError: true, message : errorH});
-    if(error)
-      setErrorModal({isError: true, message : error});
-  }, [errorH, error])
+    if(errorAcceso)
+      setErrorModal({isError: true, message : errorAcceso});
+  }, [errorH, errorAcceso])
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -53,9 +57,9 @@ const Historico = () => {
             handleChange={handleInputChange}
           />
         </div>
-        {!error &&
+        {!errorAcceso &&
           <InputSelect
-            listOption={data}
+            listOption={dataAcceso}
             nameComponent="component"
             value={component}
             handleChange={handleInputChange}
@@ -84,12 +88,12 @@ const Historico = () => {
               </tr>
             </thead>
             <tbody className="app-table-list-body">
-            {!loadingH && !errorH && !error && !loading && (
+            {!loadingH && !errorH && !errorAcceso && !loadingAcceso && (
               <>
               {dataH.map((h) => (
                 <tr key={h.id}>
                   <th scope="row">{h.id}</th>
-                  {<td>{data.find((i) => h.Componente_idComponente === i.id).nombre}</td>}
+                  {<td>{dataAcceso.find((i) => h.idAcceso === i.id).descripcion}</td>}
                   <td>{h.createdAt.substring(0,10)}</td>
                   <td>{h.usuario}</td>
                   <td>{h.descripcion}</td>
