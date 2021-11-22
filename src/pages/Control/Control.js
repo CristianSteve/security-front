@@ -6,14 +6,15 @@ import PopUpEmpty from "../../components/PopUpEmpty/PopUpEmpty";
 import ContextSocket from "../../Hooks/context-socket";
 import useSocket from "../../Hooks/useSocket";
 
+import { useHistory } from "../../Hooks/useHistory";
+import { useAcceso } from "../../Hooks/useAcceso";
+
 import { faPlus, faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 import ComponentArduino from "../Component/ComponentArduino";
-import { useComponent } from "../../Hooks/useComponent";
 
 import Aos from "aos";
 import "aos/dist/aos.css";
 import "./control.scss";
-import { useHistory } from "../../Hooks/useHistory";
 
 const message = {
   open : "Se ha generado una apertura desde el aplicativo web", 
@@ -23,12 +24,12 @@ const message = {
 const Control = () => {
 
   const { content : {socketIO} } = useContext(ContextSocket);
+  const { dataAcceso, loadingAcceso, errorAcceso } = useAcceso();
   const { createHistory } = useHistory();
   const [ emitServo ] = useSocket(socketIO);
 
-  const [pop, setPop] = useState(false);
-  const { data, loading } = useComponent();
-  const [show, setshow] = useState(false);
+  const [ pop, setPop ] = useState(false);
+  const [ show, setshow ] = useState(false);
 
   const handleChangeCheck = (flag) => {
     const open = flag.target.checked;
@@ -52,10 +53,10 @@ const Control = () => {
     <div className="cont__control">
       <h2>Control de Componentes</h2>
       <hr className="mb-5 mt-3 mb-2" />
-      {!loading && 
+      {!loadingAcceso && !errorAcceso &&
         <div className="content__card" data-aos="fade-up">
-          {data.map((c) => (
-            <CardComponent key={c.id} idComponent={c.id} nameComponent={c.nombre}created={c.createdAt.substring(0,10)} statusComponent={c.status} iconComponent={faQuestionCircle} eventClick={handleChangeCheck}/>  
+          {dataAcceso.map((c) => (
+            <CardComponent key={c.id} idComponent={c.id} nameComponent={c.descripcion} created={c.createdAt.substring(0,10)} statusComponent={c.status} iconComponent={faQuestionCircle} eventClick={handleChangeCheck}/>  
           ))}
           <CardComponent nameComponent="Nuevo Componente" iconComponent={faPlus} newComponent={true} eventComponent={()=>{setshow(!show)}}/>
         </div>
