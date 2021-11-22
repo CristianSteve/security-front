@@ -123,7 +123,7 @@ const ListItem = ({item, handleCheck = () =>{}}) => {
         <span>
           <FontAwesomeIcon icon={status ? faCheck : faBan} />
         </span>
-        {item.nombre}
+        {item.descripcion}
       </Label>
       <Switch>
         <div className="switch-button">

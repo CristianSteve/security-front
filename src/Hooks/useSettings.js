@@ -24,7 +24,7 @@ export const useSettings = () => {
         setLoadingConf(false)
       })
       .catch((errorConf) => {
-        setErrorConf(errorConf)
+        setErrorConf(errorConf.response.data.data)
         setLoadingConf(false)      
       });
   },[user.token])
@@ -49,11 +49,32 @@ export const useSettings = () => {
       });
   },[user.token])
 
+  const createConfig = useCallback( async (id) => {
+    console.log("Ejecutando create de useSettings " + id)
+    await axios
+      .post("http://192.168.1.58:4000/api/configuracion/",
+        {id},
+        {headers: 
+          {
+              'tsec' : user.token
+          }
+        },
+        )
+      .then((data) => {
+        setDataConf(data.data.data)
+        setLoadingConf(false)
+      })
+      .catch((errorConf) => {
+        setErrorConf(errorConf)
+        setLoadingConf(false)      
+      });
+  },[user.token])
+
   const setDefaultValues = () =>{
     setDataConf(null)
     setLoadingConf(true)
     setErrorConf(null)
   }
 
-  return { dataConf, loadingConf, errorConf, listConfig, modifySettings, setDefaultValues }
+  return { dataConf, loadingConf, errorConf, listConfig, modifySettings, createConfig, setDefaultValues }
 };

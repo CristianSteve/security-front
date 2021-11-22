@@ -1,17 +1,21 @@
 import React, { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { InputFloating } from '../../components/Input'
+import { useCode } from '../../Hooks/useCode';
 import { useForm } from '../../Hooks/useForm';
 import { useUser } from '../../Hooks/useUser';
 import  signup  from './signup.svg';
 
+const CLIENT = 3;
+
 const SignUp = () => {
 
-	const [values, handleInputChange] = useForm({username : "", nombre : "", email : "", password : "",celular: "", direccion : "", code: "",tyc : false});
-	const {username, nombre, email, celular, direccion, password, code, tyc } = values;
+	const [values, handleInputChange] = useForm({username : "", nombre : "", email : "", password : "",celular: "", direccion : "", codigo: "",tyc : false});
+	const {username, nombre, email, celular, direccion, password, codigo, tyc } = values;
 	const refForm = useRef(null);
 	let refSend = useRef(0);
 	const { errorUser, dataUser, RegisterUser} = useUser();
+	const { dataCodigo, errorCodigo, findCodigo } = useCode();
 
 	const handleSubmitUser = (e) =>{
 		e.preventDefault();
@@ -37,13 +41,14 @@ const SignUp = () => {
 			isError = validate(...code);
 			if(!isError){
 				if(!tyc){ alert("No acepto terminos y condiciones"); return}
-				RegisterUser(values);
+				findCodigo(codigo);
 			}
 		}
 		if(!isError && numberNext < 2)
 			refSend.current = numberNext + 1;
 	}
 
+	//Valida que los campos este informados
 	const validate = (...code) => {
 		let isError = false;
 		[...code].forEach((c) => {
@@ -56,12 +61,28 @@ const SignUp = () => {
 		return isError;
 	}
 
+	//Si se crea el usuario sin inconvenientes se da de baja al codigo
 	useEffect(() => {
 		if(errorUser)
 			alert("se ha generado error")
 		if(dataUser)
 			alert("ok")
 	}, [errorUser, dataUser])
+
+	//Si el codigo asignado es valido, se da de alta a nuevo usuario
+	useEffect(() => {
+		if(dataCodigo){
+			let fecha = new Date(dataCodigo.createdAt).setSeconds(14400);
+			let fechaNow = new Date().getTime();
+			if(fecha > fechaNow)
+				RegisterUser({...values, idProfile : CLIENT, Area_idArea : dataCodigo.area});
+			else
+				alert("Codigo se ha vencido")
+		}
+			
+		if(errorCodigo) alert(errorCodigo)
+	}, [dataCodigo, errorCodigo, RegisterUser, values]);
+
     return (
         <div className="row g-0 d-flex align-items-center">
 	    <div className="col-12 col-md-12 col-lg-6 text-center p-5">
@@ -89,7 +110,7 @@ const SignUp = () => {
 							</div>
 						</form>
 						<form onSubmit={handleSubmitUser} className="w-100 d-none d-flex justify-content-cente flex-column"> 
-                            <InputFloating placeholder="Codigo unico" type="number" nameComponent="code" value={code} handleChange={handleInputChange}/>
+                            <InputFloating placeholder="Codigo unico" type="number" nameComponent="codigo" value={codigo} handleChange={handleInputChange}/>
 							<div className="extra mb-3 mt-3">
 								<div className="form-check">
 									<input className="form-check-input" type="checkbox" name="tyc" onChange={handleInputChange}/>

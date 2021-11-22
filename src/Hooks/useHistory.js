@@ -1,11 +1,11 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import axios from "axios";
 import useAuth from "./useAuth";
 
 export const useHistory = () => {
   const { user } = useAuth();
   const [response, setResponse] = useState({
-    dataH: [],
+    dataH: null,
     loadingH: true,
     errorH: null,
   });
@@ -36,18 +36,19 @@ export const useHistory = () => {
       });
   },[user.token]);
 
-  const createHistory = async ({descripcion = "", Componente_idComponente = 0}) => {
+  const createHistory = async ({descripcion = "", idAcceso = 0}) => {
     await axios
       .post(`http://192.168.1.58:4000/api/history`,
-        {descripcion, Componente_idComponente},
+        {descripcion, idAcceso},
         {headers: 
           {
             'tsec' : user.token
           }
         })
       .then((data) => { 
+        console.log(data)
         setResponse({
-          dataH: data.data.data.history,
+          dataH: data.data.message,
           loadingH: false,
           errorH: null,
         });
@@ -61,10 +62,10 @@ export const useHistory = () => {
       });
   };
 
-  useEffect(() => {
+/*   useEffect(() => {
     console.log("Leyendo historial")
     findHistory({});
-  }, [findHistory]);
+  }, [findHistory]); */
   
   return {response, findHistory, createHistory}
 };

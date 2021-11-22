@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import axios from "axios";
 import useAuth from "./useAuth";
 
@@ -8,8 +8,8 @@ export const useUser = () => {
   const [errorUser, setErrorUser] = useState(null);
   const { user } = useAuth();
 
-  const RegisterUser = async (...values) => {
-    console.log(...values)
+  const RegisterUser = useCallback(async (...values) => {
+    console.log("creando...", ...values)
     await axios
       .post("http://192.168.1.58:4000/api/user",
         ...values,
@@ -27,7 +27,7 @@ export const useUser = () => {
         else
           setDataUser({ dataUser: null, loadingUser: false, errorUser });
       });
-  };
+  },[]);
 
   const createToken = async (username, password) => {
     console.log("Ejecutando createToken de useUser", {username, password})
@@ -45,16 +45,10 @@ export const useUser = () => {
       });
   };
 
-  const setCodeUser = async ({emailReceptor, emailEmisor = "", status = true}) => {
+  const listUsers = async () => {
+    console.log("Ejecutando listUsers")
     await axios
-      .post("http://192.168.1.58:4000/api/user/code",
-      { emailReceptor, emailEmisor, status },
-      {headers: 
-        {
-          'tsec' : user.token
-        }
-      }
-      )
+      .get("http://192.168.1.58:4000/api/user",{headers:{'tsec': user.token}})
       .then((data) => {
         setDataUser(data.data.data)
         setLoadingUser(false)
@@ -65,5 +59,5 @@ export const useUser = () => {
       });
   };
 
-  return { dataUser, loadingUser, errorUser, RegisterUser, createToken, setCodeUser}
+  return { dataUser, loadingUser, errorUser, RegisterUser, createToken, listUsers}
 };

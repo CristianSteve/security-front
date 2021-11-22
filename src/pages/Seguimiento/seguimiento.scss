@@ -25,7 +25,7 @@
       gap: 5px;
 
       ol {
-        min-width: 500px;
+        width: 500px;
       }
     
 
@@ -42,5 +42,11 @@
     > p {
       margin: 2rem 0px;
     }
+  }
+}
+
+@media (max-width: 500px) {
+  .seg__content__list{
+    width: 80vw;
   }
 }

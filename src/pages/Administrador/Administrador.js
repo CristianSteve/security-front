@@ -1,15 +1,15 @@
 import React, {useState} from "react";
 import { InputFloating, InputSelect } from "../../components/Input";
 import Notification from "../../components/Notification";
-import { useComponent } from "../../Hooks/useComponent";
+import { useArea } from "../../Hooks/useArea";
+import { useCode } from "../../Hooks/useCode";
 import { useForm } from "../../Hooks/useForm";
-import { useUser } from "../../Hooks/useUser";
 
 const Administrador = () => {
   const [ values, handleInputChange, ,resetInput ] = useForm({ area : "", emailReceptor: "" });
-  const { setCodeUser} = useUser();
+  const { setCodeUser} = useCode();
   const { area, emailReceptor } = values;
-  const { data, loading } = useComponent();
+  const { dataArea, loadingArea } = useArea()
   const [notificacion, setNotificacion] = useState({});
   const {type, message, show} = notificacion;
   const handleSubmit = (e) => {
@@ -18,7 +18,7 @@ const Administrador = () => {
     return;
     setCodeUser(values);
     resetInput();
-    setNotificacion({message : "Correo Electronico enviado correctamente", type : "success", show : true})
+    setNotificacion({message : "Correo electrónico enviado correctamente", type : "success", show : true})
   };
 
   return (
@@ -34,9 +34,9 @@ const Administrador = () => {
           <div className="app-card app-card-settings shadow-sm p-4">
             <div className="app-card-body mt-4">
               <form className="settings-form" onSubmit={handleSubmit}>
-                {!loading && data &&
+                {!loadingArea && dataArea &&
                 <InputSelect
-                  listOption={data}
+                  listOption={dataArea}
                   valueDefault="Area"
                   value={area}
                   nameComponent="area"
