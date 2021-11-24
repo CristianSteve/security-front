@@ -42,6 +42,10 @@ const Card = styled.div`
     align-items: center;
     border: 0.1rem solid #fff;
   }
+
+  @media screen and (max-width: 500px){
+    width: calc(50% - 15px);
+  }
 `;
 
 const Footer = styled.div`

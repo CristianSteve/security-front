@@ -12,6 +12,7 @@ import NotFound from "../components/NotFound/NotFound";
 import { RoutePrivate } from "../routers/RoutePrivate";
 import { ContextSocketProvider } from "../Hooks/context-socket";
 import Administrador from "./Administrador/Administrador";
+import Acceso from "./Acceso/Acceso";
 
 export const DashBoard = () => {
   return (
@@ -20,6 +21,7 @@ export const DashBoard = () => {
         <ContextSocketProvider>
           <Switch>
             <RoutePrivate exact path="/administrador" component={Administrador} />
+            <RoutePrivate exact path="/Accesos" component={Acceso} />
             <RoutePrivate exact path="/status" component={Status} />
             <RoutePrivate exact path="/seguimiento" component={Seguimiento} />
             <RoutePrivate exact path="/history" component={Historico} />

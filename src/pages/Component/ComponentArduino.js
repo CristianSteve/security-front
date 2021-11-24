@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { InputFloating, InputSelect} from "../../components/Input";
 import { useForm } from "../../Hooks/useForm";
 import { useTypeComponent } from "../../Hooks/useTypeComponent";
@@ -38,12 +38,14 @@ const Grid = style.div`
 `
 
 const ComponentArduino = () => {
-  const [values, handleInputChange] = useForm({nombre : "", entrada : "", descripcion : "", Tipo_idComponente : "", icon : "", status : true});
-  const {nombre, descripcion, Tipo_idComponente, icon, entrada} = values;
+  const [values, handleInputChange , , resetInput] = useForm({nombre : "", io : "", descripcion : "", Tipo_idComponente : "", status : true});
+  const {nombre, descripcion, Tipo_idComponente, io} = values;
   const {dataType, loadingType, isErrorType} = useTypeComponent();
-  const { data, isError, createComponent } = useComponent();
+  const {data, isError, createComponent} = useComponent();
   const [isAlert, setIsAlert] = useState({isAccept : false, show : false, message : null});
   const [notification, setNotification] = useState({activeNoti : false, msgNoti : null, type : ""});
+
+  const refCall = useRef(null);
 
   const handleSubmitComponent = (e) => {
       e.preventDefault();
@@ -59,14 +61,18 @@ const ComponentArduino = () => {
   useEffect(() => {
     if(isAlert?.isAccept){
       createComponent(values);
+      setIsAlert({...isAlert, isAccept : false });
+      resetInput();
+      refCall.current = "EJECT";
     }
-  }, [isAlert, values, createComponent])
+  }, [isAlert, values, createComponent, resetInput])
 
   useEffect(() => { 
-    if(isError)
-      setNotification({activeNoti : true, msgNoti : isError, type: "error"})
-    if(data){
-      setNotification({activeNoti : true, msgNoti : "Accion enviada correctamente"}) 
+    if(!!refCall.current){
+      if(isError)
+        setNotification({activeNoti : true, msgNoti : isError, type: "error"})
+      if(data)
+        setNotification({activeNoti : true, msgNoti : "Accion enviada correctamente"}) 
     }
   }, [isError, data])
 
@@ -78,8 +84,7 @@ const ComponentArduino = () => {
             {!loadingType && dataType && !isErrorType &&
             <InputSelect placeholder="Tipo Componente" nameComponent="Tipo_idComponente" value={Tipo_idComponente} handleChange={handleInputChange} listOption={dataType}/>
             }
-            <InputFloating placeholder="Numero Input/Output Digital" nameComponent="entrada" value={entrada} handleChange={handleInputChange} type="number"/>
-            <InputFloating placeholder="Icono" nameComponent="icon" value={icon} handleChange={handleInputChange}/>
+            <InputFloating placeholder="Numero Input/Output Digital" nameComponent="io" value={io} handleChange={handleInputChange} type="number"/>
             <InputFloating placeholder="Nombre Componente" nameComponent="nombre" value={nombre} handleChange={handleInputChange}/>
             <InputFloating placeholder="Descripción" nameComponent="descripcion" value={descripcion} handleChange={handleInputChange}/>
             <button className="btn btn-success mt-5 px-5 py-2" type="submit">Crear</button>

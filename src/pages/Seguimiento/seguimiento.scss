@@ -21,11 +21,11 @@
 
     &__list {
       display: grid;
-      grid-template-columns: 1fr 1.2fr;
+      grid-template-columns: 1fr 1fr;
       gap: 5px;
 
       ol {
-        width: 500px;
+        width: 100%;
       }
     
 
@@ -45,8 +45,14 @@
   }
 }
 
-@media (max-width: 500px) {
-  .seg__content__list{
-    width: 80vw;
+@media screen and (max-width: 500px){
+  .seg__primary .seg__content{
+    &__list{
+      grid-template-columns: 1fr;
+
+      &__plano{
+        display: none;
+      }
+    }
   }
 }

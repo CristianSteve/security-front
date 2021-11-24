@@ -16,6 +16,7 @@ import {
   faCogs,
   faUserCircle,
   faUserNinja,
+  faParachuteBox,
 } from "@fortawesome/free-solid-svg-icons";
 
 import "./menudash.scss";
@@ -52,6 +53,11 @@ export const MenuDash = ({ children }) => {
       title: "Configuraciones",
       icon: faCogs,
       enlace: "/setting",
+    },
+    {
+      title: "Accesos",
+      icon: faParachuteBox,
+      enlace: "/accesos",
     },
     {
       title: "Seguimiento",

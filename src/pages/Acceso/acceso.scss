@@ -1,0 +1,73 @@
+.content_acceso {
+    .list_access{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.2rem;
+        
+        &_card{
+            background-color: #ebecf0;
+            width: calc((100% - 4rem)/3);
+            padding: 0.8rem;
+            box-shadow: 5px 3px 8px 0px #7a7a7a24, -1px 4px 10px -0px #d8d8d8b8;
+            border-radius: 5px 5px 0px 0px;
+
+            > p{
+                font-weight: bold;
+                padding: 0.1rem 0px;
+                text-align: center;
+                font-size: 1.1rem;
+            }
+        }
+        &_body{
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+        &_items{
+            background-color: #fff;
+            min-height: 50px;
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    }
+    .list_components{
+        &_card{
+            background-color: #ebecf0;
+            padding: 10px;
+            width: 300px;
+
+        }
+        &_body{
+            background-color: #fff;
+            min-height: 50px;
+            padding: 10px;
+            margin-bottom: 2px;
+            border: 1px solid #ebecf0;
+        }
+    }
+}
+
+@media screen and (max-width: 600px){
+    .content_acceso{
+        .list_access{
+            &_card{
+                width: calc((100% - 2rem)/2);
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 400px){
+    .content_acceso{
+        .list_access{
+            &_card{
+                width: 100%;
+            }
+        }
+    }
+}
