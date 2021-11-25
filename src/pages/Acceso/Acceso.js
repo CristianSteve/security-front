@@ -16,8 +16,15 @@ const Acceso = () => {
   }, [findComponent]);
 
   useEffect(() => {
+    return () => {
+      refMount.current = null;
+    }
+  }, [])
+
+  useEffect(() => {
+    console.log("estado ref:", refMount.current)
     if(!refMount.current){
-      if (dataAcceso.length > 1 && data){
+      if (dataAcceso && data){
         const listado = {}, list = {};
         dataAcceso.forEach(e => { listado[e.id] = {...e}});
         console.table(data)

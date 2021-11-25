@@ -4,7 +4,7 @@ import useAuth from "./useAuth";
 
 export const useComponent = () => {
   const { user } = useAuth();
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isError, setIsError] = useState(false);
 

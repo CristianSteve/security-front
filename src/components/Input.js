@@ -78,7 +78,8 @@ export const InputSelect = ({
         onChange={handleChange}
       >
         <option defaultValue>{valueDefault}</option>
-        {listOption.map((list) => (
+        { !!listOption &&
+          listOption.map((list) => (
           <option key={list.id} value={list.id}>{list?.descripcion ? list.descripcion : list.nombre}</option>
         ))}
       </select>
