@@ -53,7 +53,7 @@ export const useTypeComponent = () => {
   const updateTypeComponent = async (...item) => {
     const [data] = item;
     console.log(data)
-    console.log("Actualizando estado updateComponent ", data.id)
+    console.log("Actualizando estado updateTypeComponent ", data.id)
     await axios
       .patch("http://192.168.1.58:4000/api/tipoComponente/"+ data.id,
       {...data},

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { InputFloating, InputSelect} from "../../components/Input";
 import { useForm } from "../../Hooks/useForm";
 import { useTypeComponent } from "../../Hooks/useTypeComponent";
@@ -45,8 +45,6 @@ const ComponentArduino = () => {
   const [isAlert, setIsAlert] = useState({isAccept : false, show : false, message : null});
   const [notification, setNotification] = useState({activeNoti : false, msgNoti : null, type : ""});
 
-  const refCall = useRef(null);
-
   const handleSubmitComponent = (e) => {
       e.preventDefault();
       for(let input in values){
@@ -63,17 +61,14 @@ const ComponentArduino = () => {
       createComponent(values);
       setIsAlert({...isAlert, isAccept : false });
       resetInput();
-      refCall.current = "EJECT";
     }
   }, [isAlert, values, createComponent, resetInput])
 
   useEffect(() => { 
-    if(!!refCall.current){
       if(isError)
         setNotification({activeNoti : true, msgNoti : isError, type: "error"})
       if(data)
         setNotification({activeNoti : true, msgNoti : "Accion enviada correctamente"}) 
-    }
   }, [isError, data])
 
   return (

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import axios from "axios";
 import useAuth from "./useAuth";
 
@@ -8,9 +8,10 @@ export const useComponent = () => {
   const [loading, setLoading] = useState(true);
   const [isError, setIsError] = useState(false);
 
-  const findComponent = useCallback(async () => {
+  const findComponent = useCallback(async (idAcceso) => {
+    console.log("consultando acceso en components: ", idAcceso)
     await axios
-      .get("http://192.168.1.58:4000/api/component",
+      .get(`http://192.168.1.58:4000/api/component?acceso=${idAcceso}`,
       {headers: 
         {
           'tsec' :  user.token
@@ -51,13 +52,11 @@ export const useComponent = () => {
       })
   },[user.token]);
 
-  const updateComponent = async (...item) => {
-    const [data] = item;
-    console.log(data)
-    console.log("Actualizando estado updateComponent ", data.id)
+  const updateComponent = async ({idItem, idAcceso}) => {
+    console.log("Actualizando estado updateComponent ", idItem)
     await axios
-      .patch("http://192.168.1.58:4000/api/component/"+ data.id,
-      {...data},
+      .patch("http://192.168.1.58:4000/api/component/access/"+ idItem,
+      {idAcceso},
       {headers: 
         {
           'tsec' : user.token
@@ -73,10 +72,6 @@ export const useComponent = () => {
           setIsError(error);
       });
   };
-
-  useEffect(() => {
-    findComponent();
-  }, [findComponent]);
 
   return {data, loading, isError, findComponent, createComponent, updateComponent}
 };

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
-//import { useComponent } from "../../Hooks/useComponent";
 import { useHistory } from "../../Hooks/useHistory";
 
 import ListItem from "../../components/ListItem";
@@ -11,7 +10,6 @@ import { useAcceso } from "../../Hooks/useAcceso";
 
 const Seguimiento = () => {
   const { response, createHistory } = useHistory();
-/*   const { data, loading, error, updateComponent } = useComponent(); */
   const { dataAcceso, loadingAcceso, errorAcceso, updateAcceso } = useAcceso();
   const [notificacion, setNotificacion] = useState({});
   const {type, message, show} = notificacion;

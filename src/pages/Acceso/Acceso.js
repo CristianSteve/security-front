@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useAcceso } from "../../Hooks/useAcceso";
 import { useComponent } from "../../Hooks/useComponent";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
@@ -6,25 +6,34 @@ import "./acceso.scss";
 
 const Acceso = () => {
   const { dataAcceso, loadingAcceso, errorAcceso } = useAcceso();
-  const { data, loading, isError } = useComponent();
+  const { data, loading, isError, findComponent, updateComponent } = useComponent();
 
   const [listAccess, setListAccess] = useState({});
+  const refMount = useRef(null)
 
   useEffect(() => {
-    if (dataAcceso && data){
+    findComponent("null");
+  }, [findComponent]);
+
+  useEffect(() => {
+    if(!refMount.current){
+      if (dataAcceso.length > 1 && data){
         const listado = {}, list = {};
         dataAcceso.forEach(e => { listado[e.id] = {...e}});
-        list.empty =  {id: "empty", descripcion : "Componentes", items : data }
+        console.table(data)
+        list['0'] =  {id: "empty", descripcion : "Componentes", items : data }
 
         setListAccess({ ...list, ...listado});
+        refMount.current = 'mount';
+      }
     }
   }, [dataAcceso, data]);
-
-
+  
+  
   const onDragMove = (result, listAccess, setListAccess) => {
     if (!result.destination) return;
     const { source, destination } = result;
-    console.log({ source, destination, listAccess, setListAccess } )
+    //console.log({ source, destination, listAccess, setListAccess } )
  
     if (source.droppableId !== destination.droppableId) {
         const sourceColumn = listAccess[source.droppableId];
@@ -33,7 +42,7 @@ const Acceso = () => {
         const destItems = [...destColumn.items];
         const [removed] = sourceItems.splice(source.index, 1);
         destItems.splice(destination.index, 0, removed);
-        console.log({sourceColumn , destColumn, sourceItems, destItems});
+        updateItemAccess(destColumn.id, removed.id)
         setListAccess(
           {
             ...listAccess,
@@ -61,6 +70,12 @@ const Acceso = () => {
       });
     }
   }
+
+  const updateItemAccess = (idAcceso, idItem) =>{
+    //console.log("update", {idAcceso, idItem})
+    if(idAcceso === "empty") idAcceso = null;
+    updateComponent({idAcceso, idItem});
+  }
   //https://codesandbox.io/s/angry-agnesi-bjcsy?file=/src/App.js:2077-2091
   //https://github.com/atlassian/react-beautiful-dnd
   //https://codesandbox.io/examples/package/react-beautiful-dnd
@@ -77,10 +92,10 @@ const Acceso = () => {
                 <Droppable droppableId={`${columnId}`}>
                   {(droppableProvided, snapshot) => (
                     <div className="list_access_body" 
-                      key={columnId} 
-                      {...droppableProvided.droppableProps}
-                      ref={droppableProvided.innerRef}
-                      style={{background: snapshot.isDraggingOver && "lightblue"}}
+                    {...droppableProvided.droppableProps}
+                    ref={droppableProvided.innerRef}
+                    style={{background: snapshot.isDraggingOver && "lightblue"}}
+                    key={columnId} 
                     >
                         {column.items.map((c, i) => (
                             <Draggable
@@ -95,7 +110,12 @@ const Acceso = () => {
                                 {...draggableProvided.dragHandleProps}
                                 >
                                     <div className="list_access_items">
-                                        <p>{c.descripcion}</p>
+                                      <div>
+                                        <p>Input: {c.io}</p>
+                                        <p>{c.nombre}</p>
+                                      </div>
+                                      <hr/>
+                                      <span>{c.descripcion}</span>
                                     </div>
                                 </div>
                             )}
@@ -108,38 +128,6 @@ const Acceso = () => {
               </div>
             ))}
         </div>
-       {/*  <div className="list_components">
-          <Droppable droppableId="components">
-            {(droppableProvided) => (
-              <div
-                className="list_components_card"
-                {...droppableProvided.droppableProps}
-                ref={droppableProvided.innerRef}
-              >
-                <span>Componentes</span>
-                {!loading &&
-                  !isError &&
-                  listCompo.map((c, i) => (
-                    <Draggable key={c.id} index={i} draggableId={`ele-${c.id}`}>
-                      {(draggableProvided) => (
-                        <div
-                          {...draggableProvided.draggableProps}
-                          ref={draggableProvided.innerRef}
-                          {...draggableProvided.dragHandleProps}
-                        >
-                          <div className="list_components_body">
-                            <span>{c.nombre}</span>
-                            <p>{c.descripcion}</p>
-                          </div>
-                        </div>
-                      )}
-                    </Draggable>
-                  ))}
-                {droppableProvided.placeholder}
-              </div>
-            )}
-          </Droppable>
-        </div> */}
       </div>
     </DragDropContext>
   );
