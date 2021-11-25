@@ -67,7 +67,7 @@ export const InputSelect = ({
   handleChange = () => {},
 }) => {
   return (
-    <div className="col-sm-4 mb-3">
+    <div className="col-sm-5 col-xs-12 mb-3">
       <label className={`${!placeholder && "visually-hidden"}`}>
         {placeholder}
       </label>

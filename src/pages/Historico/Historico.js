@@ -47,7 +47,7 @@ const Historico = () => {
       <h2>Historico de alertas</h2>
       <hr />
       <form className="row g-3 mt-3" onSubmit={handleSubmit}>
-        <div className="col-auto">
+        <div className="col-sm-4 col-xs-12">
           <Input
             icon={faCalendar}
             type="date"
@@ -93,10 +93,10 @@ const Historico = () => {
               {dataH.map((h) => (
                 <tr key={h.id}>
                   <th scope="row">{h.id}</th>
-                  {<td>{dataAcceso.find((i) => h.idAcceso === i.id).descripcion}</td>}
-                  <td>{h.createdAt.substring(0,10)}</td>
-                  <td>{h.usuario}</td>
-                  <td>{h.descripcion}</td>
+                  {<td data-label="Componente">{dataAcceso.find((i) => h.idAcceso === i.id).descripcion}</td>}
+                  <td data-label="Fecha">{h.createdAt.substring(0,10)}</td>
+                  <td data-label="Usuario">{h.usuario}</td>
+                  <td data-label="Descripción">{h.descripcion}</td>
                 </tr>
               ))}
               </>

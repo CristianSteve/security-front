@@ -10,9 +10,29 @@ const NotFounds = styled.div`
 
   div {
     position: absolute;
-    top: 45%;
+    top: 10%;
     right: 10%;
     text-align: center; 
+
+    & p:first-child{
+      font-size: 2rem;
+      font-weight: bold;
+    }
+  }
+
+  @media screen and (max-width:600px){
+    img{
+      width:100%
+    }
+
+    div {
+      position: sticky;
+      width: 100%;
+      bottom: 10%;
+      right: 0%;
+      text-align: center; 
+      font-size: 2rem !important;
+    }
   }
 `;
 

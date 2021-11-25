@@ -33,12 +33,12 @@ const Control = () => {
 
   const handleChangeCheck = (flag) => {
     const open = flag.target.checked;
-    const Componente_idComponente = flag.target.id;
+    const idAcceso = flag.target.id;
     const descripcion = open ? message.open : message.close;
 
     emitServo((open)?"C":"A");
 
-    createHistory({descripcion, Componente_idComponente});
+    createHistory({descripcion, idAcceso});
     setPop(true);
     setTimeout(function(){
       setPop(false);
