@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Input, InputSelect } from "../../components/Input";
 import { useForm } from "../../Hooks/useForm";
 import { faCalendar, faHistory, faSearch } from "@fortawesome/free-solid-svg-icons";
-import { useHistory } from "../../Hooks/useHistory";
 
 import { useAcceso } from "../../Hooks/useAcceso";
+import { useHistory } from "../../Hooks/useHistory";
 import { ModalAlert } from "../../components/ModalAlert";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -14,7 +14,7 @@ const Historico = () => {
   const [ values, handleInputChange ] = useForm({ calendar: "", component: "" });
   const { calendar, component } = values;
   
-  const [errorModal, setErrorModal] = useState({isError: false,message: ""});
+  const [ errorModal, setErrorModal ] = useState({isError: false,message: ""});
   const { isError, message } = errorModal;
 
   const isErrorReset = () => setErrorModal({ isError: false, message: "" });
@@ -82,19 +82,21 @@ const Historico = () => {
               <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Componente</th>
-                <th scope="col">Fecha/Hora</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Hora</th>
                 <th scope="col">Usuario</th>
                 <th scope="col">Descripción</th>
               </tr>
             </thead>
             <tbody className="app-table-list-body">
-            {!loadingH && !errorH && !errorAcceso && !loadingAcceso && (
+            {!loadingH && !errorH && !errorAcceso && !loadingAcceso && dataAcceso && (
               <>
               {dataH.map((h) => (
                 <tr key={h.id}>
                   <th scope="row">{h.id}</th>
                   {<td data-label="Componente">{dataAcceso.find((i) => h.idAcceso === i.id).descripcion}</td>}
                   <td data-label="Fecha">{h.createdAt.substring(0,10)}</td>
+                  <td data-label="Hora">{h.createdAt.substring(12,19)}</td>
                   <td data-label="Usuario">{h.usuario}</td>
                   <td data-label="Descripción">{h.descripcion}</td>
                 </tr>

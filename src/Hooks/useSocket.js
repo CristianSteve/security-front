@@ -14,7 +14,7 @@ const useSocket = (Socket = {}) => {
     }, [Socket]);   */
 
     const emitServo = (flag) => {
-      Socket.emit('nuevo', {servo : flag});
+      Socket.emit('acceso', {servo : flag});
         console.log("---> Peticion enviada..", flag);
     }
 

@@ -24,21 +24,21 @@ const message = {
 const Control = () => {
 
   const { content : {socketIO} } = useContext(ContextSocket);
-  const { dataAcceso, loadingAcceso, errorAcceso } = useAcceso();
+  const { dataAcceso, loadingAcceso, errorAcceso, updateAcceso } = useAcceso();
   const { createHistory } = useHistory();
   const [ emitServo ] = useSocket(socketIO);
 
   const [ pop, setPop ] = useState(false);
   const [ show, setshow ] = useState(false);
 
-  const handleChangeCheck = (flag) => {
+  const handleChangeCheck = (flag, data) => {
     const open = flag.target.checked;
     const idAcceso = flag.target.id;
     const descripcion = open ? message.open : message.close;
 
-    emitServo((open)?"C":"A");
-
+    updateAcceso({...data, action : open});
     createHistory({descripcion, idAcceso});
+    emitServo(flag.target.id);
     setPop(true);
     setTimeout(function(){
       setPop(false);
@@ -56,7 +56,7 @@ const Control = () => {
       {!loadingAcceso && !errorAcceso &&
         <div className="content__card" data-aos="fade-up">
           {dataAcceso.map((c) => (
-            <CardComponent key={c.id} idComponent={c.id} nameComponent={c.descripcion} created={c.createdAt.substring(0,10)} statusComponent={c.status} iconComponent={faQuestionCircle} eventClick={handleChangeCheck}/>  
+            <CardComponent key={c.id} data={c} idComponent={c.id} action={c.action} nameComponent={c.descripcion} created={c.createdAt.substring(0,10)} statusComponent={c.status} iconComponent={faQuestionCircle} eventClick={handleChangeCheck}/>  
           ))}
           <CardComponent nameComponent="Nuevo Componente" iconComponent={faPlus} newComponent={true} eventComponent={()=>{setshow(!show)}}/>
         </div>

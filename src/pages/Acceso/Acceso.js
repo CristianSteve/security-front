@@ -3,12 +3,14 @@ import { useAcceso } from "../../Hooks/useAcceso";
 import { useComponent } from "../../Hooks/useComponent";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import "./acceso.scss";
+import Notification from "../../components/Notification";
 
 const Acceso = () => {
   const { dataAcceso, loadingAcceso, errorAcceso } = useAcceso();
   const { data, loading, isError, findComponent, updateComponent } = useComponent();
+  const [ notification, setNotification ] = useState({activeNoti : false, msgNoti : null, type : ""});
 
-  const [listAccess, setListAccess] = useState({});
+  const [ listAccess, setListAccess ] = useState({});
   const refMount = useRef(null)
 
   useEffect(() => {
@@ -49,6 +51,11 @@ const Acceso = () => {
         const destItems = [...destColumn.items];
         const [removed] = sourceItems.splice(source.index, 1);
         destItems.splice(destination.index, 0, removed);
+        const isExist = destColumn.items.find((component) => (component.Tipo_idComponente === removed.Tipo_idComponente));
+        if(isExist && destColumn.id !== 'empty'){
+          setNotification({activeNoti : true, msgNoti : "Lo sentimos, solo puedes adicionar un componente por tipo", type : "danger"})
+          return;
+        }
         updateItemAccess(destColumn.id, removed.id)
         setListAccess(
           {
@@ -87,6 +94,7 @@ const Acceso = () => {
   //https://github.com/atlassian/react-beautiful-dnd
   //https://codesandbox.io/examples/package/react-beautiful-dnd
   return (
+    <>
     <DragDropContext
       onDragEnd={(result) => onDragMove(result, listAccess, setListAccess)}
     >
@@ -137,6 +145,8 @@ const Acceso = () => {
         </div>
       </div>
     </DragDropContext>
+    <Notification type={notification.type} message={notification.msgNoti} onHide={ () => setNotification({...notification, activeNoti : false})} show={notification.activeNoti}/>
+  </>
   );
 };
 

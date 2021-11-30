@@ -32,7 +32,7 @@ const Card = styled.div`
   .ui-second {
     position: absolute;
     top: -25px;
-    left: calc(100% - 60%);
+    left: calc(50% - 1.5rem);
     background: ${props => props.target.ftColor};
     width: 3rem;
     height: 3rem;

@@ -51,15 +51,20 @@ const Body = styled.div`
     justify-content: end;
     padding-top: 10px;
   }
+
+  .status{
+    color: ${props => (props.target.status? "green" : "red")};
+  }
 `;
 
-const CardComponent = ({idComponent, nameComponent, created, statusComponent, iconComponent, newComponent=false, eventClick=()=>{}, eventComponent =()=>{}}) => {
+const CardComponent = ({data = {}, idComponent, nameComponent, action = false, created, statusComponent, iconComponent, newComponent=false, eventClick=()=>{}, eventComponent =()=>{}}) => {
+
   return (
     <Card>
       <Head onClick={eventComponent}>
         <FontAwesomeIcon icon={iconComponent} />
       </Head>
-      <Body>
+      <Body target={{status : statusComponent}}>
         <p>{nameComponent}</p>
         {!newComponent &&
         <ol>
@@ -67,12 +72,12 @@ const CardComponent = ({idComponent, nameComponent, created, statusComponent, ic
             <span>Creado : </span>{created}
           </li>
           <li>
-            <span>Estado : </span>{statusComponent?"Activo":"Inactivo"}
+            <span>Estado : </span><span className="status">{statusComponent?"Activo":"Inactivo"}</span>
           </li>
           <li className="ult">
-            <span>Abrir/Cerrar </span>
+            <span>Cerrado/Abierto </span>
             <div className="form-check form-switch ms-2">
-              <input id={idComponent} className="form-check-input" type="checkbox" disabled={!statusComponent} onChange={eventClick} />
+              <input id={idComponent} className="form-check-input" type="checkbox" defaultChecked={action} disabled={!statusComponent} onChange={(e)=>{eventClick(e, data)}} />
             </div>
           </li>
         </ol>
