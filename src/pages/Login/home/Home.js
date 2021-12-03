@@ -14,33 +14,34 @@ const Home = () => {
   const refBar = useRef(null);
 
   const handleBar = () => {
-    console.log(refBar);
     refBar.current.nextSibling.classList.toggle("active");
-  }
+  };
 
   return (
     <>
       <header className="dgd_h">
         <nav>
-        <div className="dgd_h_bar" ref={refBar} onClick={handleBar}>
-          <FontAwesomeIcon icon={faBars} />
-        </div>
-          <div>
-            <Link to="/">
-              <img src="https://i.ibb.co/z4bDXz8/Logo.jpg" alt="logo" />
-              Windoor <span>Security</span>
-            </Link>
+          <div className="dgd_h_bar" ref={refBar} onClick={handleBar}>
+            <FontAwesomeIcon icon={faBars} />
           </div>
-          <ul>
-            <li>Inicio</li>
-            <li>Objetivos</li>
-            <li>Alcance</li>
-          </ul>
-          <div className="links">
-            <Link to="/login">Login</Link>
-            <Link className="btn btn-primary" to="/signup">
-              Registrarse
-            </Link>
+          <div className="item">
+            <div>
+              <Link to="/">
+                <img src="https://i.ibb.co/z4bDXz8/Logo.jpg" alt="logo" />
+                Windoor <span>Security</span>
+              </Link>
+            </div>
+            <ul>
+              <li>Inicio</li>
+              <li>Objetivos</li>
+              <li>Alcance</li>
+            </ul>
+            <div className="links">
+              <Link to="/login">Login</Link>
+              <Link className="btn btn-primary" to="/signup">
+                Registrarse
+              </Link>
+            </div>
           </div>
         </nav>
       </header>

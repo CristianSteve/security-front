@@ -7,6 +7,8 @@
     }
     
     nav{
+        height: 100%;
+        .item{
         color: #3f3d56;
         height: 100%;
         display: flex;
@@ -14,7 +16,7 @@
         align-items: center;
         justify-content:space-between;
 
-        & div:nth-child(2){
+        & div:nth-child(1){
             img{
                 height: 80px;
                 mix-blend-mode: darken;
@@ -45,6 +47,7 @@
             font-size: 1.1rem;
             font-weight: bold;
         }
+    }
     }
     
     .links{
@@ -160,7 +163,9 @@
         height: 10vh;
         display: flex;
         align-items: center;
-
+        width: 100%;
+        position: fixed;
+        z-index: 99;
         .dgd_h_bar{
             display: block;
         }
@@ -171,64 +176,70 @@
             color: #333;
         }
 
-        nav.active{
+        .item.active{
             display: block;
         }
         nav{
-            //display: none;
-            position: fixed;
-            padding: 1rem;
-            left: 0px;
-            top:0px;
-            height: 100vh;
-            width: 80%;
-            flex-direction: column;
-            background-color: #F6F8FB;
-            margin: 0px;
-            overflow: hidden;
-            justify-content: start;
-            align-items: start;
-            z-index: 2;
-            box-shadow: 1px 3px 4px 0px #ccc;
-
-
-            & div:first-child{
-                align-self: center;
-                padding-bottom: 1rem;
-                border-bottom: 1px solid #ccc;
-            }
-            
-            ul{
-                width: 100%;
-                font-size: 1.1rem;
-                flex-direction: column;
-                margin-top: 2rem;
-                height: 50vh;
-                justify-content: start;
-                li{
-                    margin: 2rem 3rem;
-                }
-            }
-
-            .links{
-                border-top: 1px solid #ccc;
-                margin: 2rem 3rem;
-                flex-direction: column;
-                display: flex;
-                justify-content: space-around;
-                height: 20vh;
+            height: auto;
+            .item{
+                display: none;
+                position: fixed;
+                padding: 1rem;
+                left: 0px;
+                top: 10vh;
+                height: 100vh;
                 width: 80%;
+                flex-direction: column;
+                background-color: #F6F8FB;
+                margin: 0px;
+                overflow: hidden;
+                justify-content: start;
+                align-items: start;
+                z-index: 2;
+                box-shadow: 1px 3px 4px 0px #ccc;
+                transition: all 0.5 ease;
 
-                a{
-                    margin: 0px;
+                & div:nth-child(1){
+                    align-self: center;
+                    padding-bottom: 1rem;
+                    border-bottom: 1px solid #ccc;
+                }
+                
+                ul{
+                    width: 100%;
+                    font-size: 1.1rem;
+                    flex-direction: column;
+                    margin-top: 2rem;
+                    height: 40vh;
+                    justify-content: start;
+                    
+                    li{
+                        margin: 2rem 3rem;
+                        border-bottom: 1px solid #ccc;
+                    }
                 }
 
-                .btn{
-                    padding: 15px;
+                .links{
+                    border-top: 1px solid #ccc;
+                    margin: 2rem 3rem;
+                    flex-direction: column;
+                    display: flex;
+                    justify-content: space-around;
+                    height: 20vh;
+                    width: 80%;
+
+                    a{
+                        margin: 0px;
+                    }
+
+                    .btn{
+                        padding: 15px;
+                    }
                 }
             }
         }
     }
+
     .ghsty_s{
         &_l{
             height: auto !important;
@@ -247,6 +258,7 @@
                 }
             }
         }
+
         .card_p{
             .card_h{
                 width: 100%;
