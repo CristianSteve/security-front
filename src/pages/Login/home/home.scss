@@ -69,7 +69,7 @@
     background-color: #F6F8FB;
     
     >div{
-        height: 100vh;
+        min-height: 100vh;
     }
     
     &_l{
@@ -166,6 +166,8 @@
         width: 100%;
         position: fixed;
         z-index: 99;
+        background-color: #d82b65;
+        
         .dgd_h_bar{
             display: block;
         }
@@ -173,16 +175,15 @@
         svg{
             font-size: 1.5rem;
             margin-left: 1rem;
-            color: #333;
+            color: #fff;
         }
 
         .item.active{
-            display: block;
+            transform: translateX(0%);
         }
         nav{
             height: auto;
-            .item{
-                display: none;
+            .item{     
                 position: fixed;
                 padding: 1rem;
                 left: 0px;
@@ -197,7 +198,8 @@
                 align-items: start;
                 z-index: 2;
                 box-shadow: 1px 3px 4px 0px #ccc;
-                transition: all 0.5 ease;
+                transform: translateX(-100%);
+                transition: all 0.7s ease;
 
                 & div:nth-child(1){
                     align-self: center;
@@ -215,7 +217,7 @@
                     
                     li{
                         margin: 2rem 3rem;
-                        border-bottom: 1px solid #ccc;
+                        //border-bottom: 1px solid #ccc;
                     }
                 }
 
@@ -235,6 +237,12 @@
                     .btn{
                         padding: 15px;
                     }
+                }
+
+                &::before{
+                    content: '';
+                    width: 100vh;
+                    background-color: red;
                 }
             }
         }
@@ -265,6 +273,7 @@
                 height: 100%;
                 grid-template-columns: 1fr;
                 border-radius: 0px;
+                margin-top: 10vh;
                 
                 & div:first-child{
                     padding: 1.5rem; 
