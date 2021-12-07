@@ -60,6 +60,7 @@ const Administrador = () => {
             </div>
           </div>
         </div>
+        <p>Falta listar usuarios(asignar permisos), crear areas </p>
       </div>
       <Notification type={type} message={message} show={show} 
         onHide={ () => setNotificacion({...notificacion, show : false})}

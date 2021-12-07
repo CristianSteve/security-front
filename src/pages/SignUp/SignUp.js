@@ -1,6 +1,7 @@
-import React, { useEffect, useRef } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useRef, useState } from 'react'
+import { Link, useHistory } from 'react-router-dom'
 import { InputFloating } from '../../components/Input'
+import { ModalAlert } from '../../components/ModalAlert';
 import { useCode } from '../../Hooks/useCode';
 import { useForm } from '../../Hooks/useForm';
 import { useUser } from '../../Hooks/useUser';
@@ -12,15 +13,17 @@ const SignUp = () => {
 
 	const [values, handleInputChange] = useForm({username : "", nombre : "", email : "", password : "",celular: "", direccion : "", codigo: "",tyc : false});
 	const {username, nombre, email, celular, direccion, password, codigo, tyc } = values;
+	const [isAlert, setIsAlert] = useState({isAccept : false, show : false, message : null});
+	const history = useHistory();
 	const refForm = useRef(null);
 	let refSend = useRef(0);
 	const { errorUser, dataUser, RegisterUser} = useUser();
-	const { dataCodigo, errorCodigo, findCodigo } = useCode();
+	const { dataCodigo, errorCodigo, findCodigo, resetValues } = useCode();
 
 	const handleSubmitUser = (e) =>{
 		e.preventDefault();
 		const numberNext = refSend.current;
-		const [user, basic, code] = refForm.current.children;
+		const [ user, basic, code ] = refForm.current.children;
 		let isError = false;
 
 		if(numberNext === 0){
@@ -40,7 +43,7 @@ const SignUp = () => {
 		if(numberNext === 2){
 			isError = validate(...code);
 			if(!isError){
-				if(!tyc){ alert("No acepto terminos y condiciones"); return}
+				if(!tyc){ setIsAlert({...isAlert, show : !isAlert.show, message : "No acepto terminos y condiciones"}); return}
 				findCodigo(codigo);
 			}
 		}
@@ -64,10 +67,10 @@ const SignUp = () => {
 	//Si se crea el usuario sin inconvenientes se da de baja al codigo
 	useEffect(() => {
 		if(errorUser)
-			alert("se ha generado error")
+			setIsAlert({...isAlert, show : !isAlert.show, message : "Ha ocurrido un error de procesamiento"});
 		if(dataUser)
-			alert("ok")
-	}, [errorUser, dataUser])
+			history.push({pathname : "/login"})
+	}, [errorUser, dataUser, history, isAlert])
 
 	//Si el codigo asignado es valido, se da de alta a nuevo usuario
 	useEffect(() => {
@@ -77,11 +80,15 @@ const SignUp = () => {
 			if(fecha > fechaNow)
 				RegisterUser({...values, idProfile : CLIENT, Area_idArea : dataCodigo.area});
 			else
-				alert("Codigo se ha vencido")
+				setIsAlert({...isAlert, show : !isAlert.show, message : "El código se ha vencido"})
+			resetValues();
 		}
 			
-		if(errorCodigo) alert(errorCodigo)
-	}, [dataCodigo, errorCodigo, RegisterUser, values]);
+		if(errorCodigo) {
+			setIsAlert({...isAlert, show : !isAlert.show, message : errorCodigo})
+			resetValues();
+		}
+	}, [dataCodigo, errorCodigo, RegisterUser, resetValues, isAlert, values]);
 
     return (
         <div className="row g-0 d-flex align-items-center">
@@ -133,6 +140,7 @@ const SignUp = () => {
                 <img src={signup} alt="signup windoor" style={{width : "70%"}}/>		    
             </div>
 	    </div>
+		<ModalAlert show={isAlert.show} onHide={({isAccept}) => setIsAlert({show : !isAlert.show, isAccept})} msgPrimary={isAlert.primary} messageError={isAlert.message} />
     </div>
     )
 }

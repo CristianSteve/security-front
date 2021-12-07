@@ -9,45 +9,45 @@
     nav{
         height: 100%;
         .item{
-        color: #3f3d56;
-        height: 100%;
-        display: flex;
-        font-weight: bold;
-        align-items: center;
-        justify-content:space-between;
+            color: #3f3d56;
+            height: 100%;
+            display: flex;
+            font-weight: bold;
+            align-items: center;
+            justify-content:space-between;
 
-        & div:nth-child(1){
-            img{
-                height: 80px;
-                mix-blend-mode: darken;
-            }
+            & div:nth-child(1){
+                img{
+                    height: 80px;
+                    mix-blend-mode: darken;
+                }
 
-            a{
-                font-family: 'DM Sans', sans-serif;
-                font-size: 1.3rem;
-                span{
-                    color: #3f3d56;
+                a{
+                    font-family: 'DM Sans', sans-serif;
+                    font-size: 1.3rem;
+                    span{
+                        color: #3f3d56;
+                    }
                 }
             }
+            
+            
+            ul{
+                width: 30vw;
+                margin: 0px;
+                padding: 0px;
+                display: flex;
+                list-style: none;
+                justify-content: space-between;
+            }
+            a{
+                margin: 0px 10px;
+                text-decoration: none;
+                color: #000;
+                font-size: 1.1rem;
+                font-weight: bold;
+            }
         }
-        
-        
-        ul{
-            width: 30vw;
-            margin: 0px;
-            padding: 0px;
-            display: flex;
-            list-style: none;
-            justify-content: space-between;
-        }
-        a{
-            margin: 0px 10px;
-            text-decoration: none;
-            color: #000;
-            font-size: 1.1rem;
-            font-weight: bold;
-        }
-    }
     }
     
     .links{
@@ -69,7 +69,7 @@
     background-color: #F6F8FB;
     
     >div{
-        min-height: 100vh;
+        height: 100vh;
     }
     
     &_l{
@@ -93,7 +93,16 @@
                     background-color: #fff;
                 }
             }
+            p{
+                text-align: justify;
+            }
             
+        }
+        h4{
+            font-weight: bold;
+        }
+        img{
+            width: 100%;
         }
     }
         
@@ -155,8 +164,27 @@
     }
 }
 
-@media screen and(max-width: 500px){
-    
+@media screen and(max-width: 950px){
+    .dgd_h nav .item div:first-child a, .dgd_h nav .item .links a{
+        font-size: 0.888rem !important;
+    }
+    .ghsty_s .card_p .card_h h3{
+            font-size: 1.8rem !important;
+    }
+    .ghsty_s .card_p .card_h div:first-child p {
+        font-size: 0.88rem !important;
+    }
+}
+
+
+@media screen and(max-width: 800px){
+    .ghsty_s .card_p .card_h div:first-child{
+        padding-right: 0px;
+    }
+}
+
+
+@media screen and(max-width: 600px){    
     .dgd_h{
         box-shadow: 4px 3px 7px 0px #ccc;
         background-color: #F6F8FB;
@@ -170,6 +198,7 @@
         
         .dgd_h_bar{
             display: block;
+            cursor: pointer;
         }
 
         svg{
@@ -250,11 +279,11 @@
 
     .ghsty_s{
         &_l{
-            height: auto !important;
             >div{
                 display: flex;
                 flex-wrap: wrap;
                 flex-direction: column;
+                height: auto;
 
                 div{
                     width: 100%;
@@ -268,6 +297,7 @@
         }
 
         .card_p{
+            height: auto;
             .card_h{
                 width: 100%;
                 height: 100%;

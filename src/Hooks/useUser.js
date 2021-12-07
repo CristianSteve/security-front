@@ -3,9 +3,9 @@ import axios from "axios";
 import useAuth from "./useAuth";
 
 export const useUser = () => {
-  const [dataUser, setDataUser] = useState(null);
-  const [loadingUser, setLoadingUser] = useState(true);
-  const [errorUser, setErrorUser] = useState(null);
+  const [ dataUser, setDataUser ] = useState(null);
+  const [ loadingUser, setLoadingUser ] = useState(true);
+  const [ errorUser, setErrorUser ] = useState(null);
   const { user } = useAuth();
 
   const RegisterUser = useCallback(async (...values) => {
@@ -45,10 +45,10 @@ export const useUser = () => {
       });
   };
 
-  const listUsers = async () => {
-    console.log("Ejecutando listUsers")
+  const listUsers = useCallback(async (id) => {
+    console.log("Ejecutando listUsers", id)
     await axios
-      .get("http://192.168.1.58:4000/api/user",{headers:{'tsec': user.token}})
+      .get(`http://192.168.1.58:4000/api/user/${id}`,{headers:{'tsec': user.token}})
       .then((data) => {
         setDataUser(data.data.data)
         setLoadingUser(false)
@@ -57,7 +57,21 @@ export const useUser = () => {
         setErrorUser(errorUser)
         setLoadingUser(false)
       });
-  };
+  },[user?.token]);
 
-  return { dataUser, loadingUser, errorUser, RegisterUser, createToken, listUsers}
+  const updateUser = useCallback(async ({...dUser}) => {
+    console.log("Ejecutando updateUser", dUser.id)
+    await axios
+      .patch(`http://192.168.1.58:4000/api/user/${dUser.id}`,{...dUser},{headers:{'tsec': user.token}})
+      .then((data) => {
+        setDataUser(data.data.data)
+        setLoadingUser(false)
+      })
+      .catch((errorUser) => {
+        setErrorUser(errorUser)
+        setLoadingUser(false)
+      });
+  },[user?.token]);
+
+  return { dataUser, loadingUser, errorUser, RegisterUser, createToken, listUsers, updateUser }
 };

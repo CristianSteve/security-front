@@ -1,10 +1,11 @@
 import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import Aos from "aos";
-import "aos/dist/aos.css";
-import "./home.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
+
+import "aos/dist/aos.css";
+import "./home.scss";
 
 const Home = () => {
   useEffect(() => {
@@ -74,15 +75,21 @@ const Home = () => {
               <span data-aos="fade-up">Introducción</span>
             </div>
             <div>
-              La seguridad en propiedades privadas es uno de los delitos que se
-              están cometiendo más frecuentemente en el país, cuando hablamos de
-              seguridad pensamos en sistemas que nos ayuden a cuidar nuestras
-              propiedades de la delincuencia en el exterior. Por todo ello,
-              desarrollaremos un sistema de monitoreo para accesos de entrada
-              basado en alertas, monitoreo de forma remota, si llega a quedar
-              una puerta o ventana abierta, al momento de activar la aplicación
-              este le informara si todo está debidamente cerrado o hay alguna
-              entrada abierta y poderla cerrar
+              <p className="mt-5">
+                La seguridad en propiedades privadas es uno de los delitos que
+                se están cometiendo más frecuentemente en el país, cuando
+                hablamos de seguridad pensamos en sistemas que nos ayuden a
+                cuidar nuestras propiedades de la delincuencia en el exterior.
+                Por todo ello, desarrollaremos un sistema de monitoreo para
+                accesos de entrada basado en alertas, monitoreo de forma remota,
+                si llega a quedar una puerta o ventana abierta, al momento de
+                activar la aplicación este le informara si todo está debidamente
+                cerrado o hay alguna entrada abierta y poderla cerrar.
+              </p>
+              <img
+                src="https://i.ibb.co/X3s58p6/search-house.png"
+                alt="introduction"
+              />
             </div>
           </div>
           <div>
@@ -90,13 +97,22 @@ const Home = () => {
               <span data-aos="fade-up">Objetivos</span>
             </div>
             <div>
-              2.1.OBJETIVO GENERAL • Desarrollar un sistema de seguridad de
-              accesos de entrada que permita monitorear y dar acceso de un área
-              privada, para prevenir el ingreso a personas no autorizadas.
-              2.2.OBJETIVOS ESPECIFICOS • Elaborar una aplicación que permita
-              notificar si algún acceso está abierto y cerrarlo desde la misma.
-              • Desarrollar el circuito electrónico que permita monitorear en
-              tiempo real el estado de los accesos.
+              <h4 className="mt-4">Objetivos Generales</h4>
+              <p>
+                Desarrollar un sistema de seguridad de accesos de entrada que
+                permita monitorear y dar acceso de un área privada, para
+                prevenir el ingreso a personas no autorizadas.
+              </p>
+              <h4 className="mt-4">Objetivos Especificos</h4>
+              <p>
+                Elaborar una aplicación que permita notificar si algún acceso
+                está abierto y cerrarlo desde la misma.
+              </p>
+              <p>
+                Desarrollar el circuito electrónico que permita monitorear en
+                tiempo real el estado de los accesos.
+              </p>
+              <img src="https://i.ibb.co/3mfX0fx/goals.png" alt="objectives" />
             </div>
           </div>
           <div>
@@ -104,27 +120,34 @@ const Home = () => {
               <span data-aos="fade-up">Alcance</span>
             </div>
             <div>
-              El proyecto nombrado Windoor Segurity está basado en una
-              aplicación web y wifi para el sistema de seguridad de hogares y
-              empresas que permite monitorear cada acceso de entrada, asignando
-              sensores y circuitos dónde irán conectados a una aplicación móvil
-              por internet donde el usuario podrá programar en qué horario
-              activar la seguridad (distintos modos), la aplicación avisará
-              cuando detecte una anomalidad en apertura de ventas o puertas,
-              enviando notificaciones. También podrá estar dando un seguimiento
-              al estado continuamente del área privada y con la ventaja de
-              revisar desde distintos dispositivos móviles o escritorio para su
-              control, el cliente podrá abrir los accesos desde la aplicación
-              para el ingreso de personas autorizadas. Windoor Segurity contara
-              con sensor RFID para activar o desactivar la seguridad desde el
-              módulo central
+              <p>
+                El proyecto nombrado <b>Windoor Segurity</b> está basado en una
+                aplicación web y wifi para el sistema de seguridad de hogares y
+                empresas que permite monitorear cada acceso de entrada,
+                asignando sensores y circuitos dónde irán conectados a una
+                aplicación móvil por internet donde el usuario podrá programar
+                en qué horario activar la seguridad (distintos modos), la
+                aplicación avisará cuando detecte una anomalidad en apertura de
+                ventas o puertas, enviando notificaciones. También podrá estar
+                dando un seguimiento al estado continuamente del área privada y
+                con la ventaja de revisar desde distintos dispositivos móviles o
+                escritorio para su control, el cliente podrá abrir los accesos
+                desde la aplicación para el ingreso de personas autorizadas.
+                Windoor Segurity contara con sensor RFID para activar o
+                desactivar la seguridad desde el módulo central
+              </p>
+              <img src="https://i.ibb.co/HGwLcc6/scope.png" alt="scope" />
             </div>
           </div>
           <div>
             <div className="f_gray">
               <span data-aos="fade-up">Participantes</span>
             </div>
-            <div>asdasd</div>
+            <div>
+              <p>Leidy Caterine Ariza Ballesteros</p>
+              <p>Jorge Castro</p>
+              <p>Cristian Steve Carrillo Soracipa</p>
+            </div>
           </div>
         </div>
       </div>

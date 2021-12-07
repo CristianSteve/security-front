@@ -8,6 +8,7 @@ export const Input = ({
   value = "",
   type = "text",
   className = "",
+  disabled = false,
   handleChange = () => {},
 }) => {
   return (
@@ -25,6 +26,7 @@ export const Input = ({
         value={value}
         onChange={handleChange}
         autoComplete="off"
+        disabled={disabled}
       />
     </div>
   );
@@ -80,7 +82,7 @@ export const InputSelect = ({
         <option defaultValue>{valueDefault}</option>
         { !!listOption &&
           listOption.map((list) => (
-          <option key={list.id} value={list.id}>{list?.descripcion ? list.descripcion : list.nombre}</option>
+          <option key={list.id} value={list.id}>{list?.nombre ? list.nombre : list.descripcion}</option>
         ))}
       </select>
     </div>
