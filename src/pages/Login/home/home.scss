@@ -1,7 +1,10 @@
 .dgd_h{
     height: 13vh;
     padding: 0px 20px;
-
+    top: 0;
+    position: sticky;
+    background-color: #fff;
+    z-index: 99;
     .dgd_h_bar{
         display: none;
     }
@@ -33,7 +36,8 @@
             
             
             ul{
-                width: 30vw;
+                //width: 35vw;
+                gap: 10px;
                 margin: 0px;
                 padding: 0px;
                 display: flex;
@@ -68,13 +72,13 @@
     
     background-color: #F6F8FB;
     
-    >div{
+    /* >div{
         height: 100vh;
-    }
+    } */
     
     &_l{
         >div{
-            height: 100%;
+            min-height: 100vh;
             display: flex;
             div{
                 width: 50%;
@@ -105,11 +109,15 @@
             width: 100%;
         }
     }
+    .ghsty_s_l > div > div:nth-child(2){
+        padding-top: 13vh;
+    }
         
     .card_p{
         display: flex;
         justify-content: center;
-        align-items: center;        
+        align-items: center;   
+        height: 100vh;     
 
         .card_h{
             height: 85%;
@@ -161,6 +169,16 @@
     .f_gray{
         background-color: #292929;
         color: #fff;
+        ~div{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            p{
+                border-bottom: 1px solid rgba(255, 0, 0, 0.719);
+            }
+        }
     }
 }
 
@@ -185,6 +203,9 @@
 
 
 @media screen and(max-width: 600px){    
+    .ghsty_s_l > div > div:nth-child(2){
+        padding-top: 5vh !important;
+    }
     .dgd_h{
         box-shadow: 4px 3px 7px 0px #ccc;
         background-color: #F6F8FB;
@@ -242,12 +263,12 @@
                     flex-direction: column;
                     margin-top: 2rem;
                     height: 40vh;
-                    justify-content: start;
+                    justify-content: space-around;
                     
-                    li{
-                        margin: 2rem 3rem;
+                    //li{
+                        //margin: 2rem 3rem;
                         //border-bottom: 1px solid #ccc;
-                    }
+                    //}
                 }
 
                 .links{
@@ -283,14 +304,17 @@
                 display: flex;
                 flex-wrap: wrap;
                 flex-direction: column;
-                height: auto;
+                height: 100vh;
 
                 div{
                     width: 100%;
                     &:first-child{
-                        height: 10vh;
+                        height: 10%;
                         font-size: 2.2rem;
                         overflow: hidden;
+                    }
+                    &:last-child{
+                        height: 90%;
                     }
                 }
             }

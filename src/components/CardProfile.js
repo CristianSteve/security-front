@@ -10,7 +10,8 @@ const CardProfile = ({ attr, vlr, name, change, type, handleChangeVlr = () => {}
 
   const handleChangeData = (e) => {
     e.preventDefault();
-    if(enable) handleChangeVlr(name, data);
+    if(enable) 
+      if(data !== vlr) handleChangeVlr(name, data);
     setEnable(!enable);
   }
 

@@ -7,7 +7,6 @@ const AuthProvider = ({children}) =>{
     const [user, setUser] = useState(
         JSON.parse(localStorage.getItem("user")) || null
     )
-    console.log("--->valor de cookie en AuthProvide");
 
     useEffect(() => {
         localStorage.setItem("user", JSON.stringify(user))
@@ -27,9 +26,10 @@ const AuthProvider = ({children}) =>{
             const dateNow = new Date();
             const dateAuth = new Date(user?.fecha || 0);
 
-            if(dateAuth.getTime() < dateNow.getTime())
+            if(dateAuth.getTime() < dateNow.getTime()){
+                localStorage.removeItem("user");
                 return false
-
+            }
             return !!user
         }
     }

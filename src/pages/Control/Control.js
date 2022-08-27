@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import useAuth from "../../Hooks/useAuth";
 
 import CardComponent from "../../components/CardComponent";
 import PopUpEmpty from "../../components/PopUpEmpty/PopUpEmpty";
@@ -15,6 +16,7 @@ import ComponentArduino from "../Component/ComponentArduino";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import "./control.scss";
+const ADMINISTRADOR = 'Administrador';
 
 const message = {
   open : "Se ha generado una apertura desde el aplicativo web", 
@@ -23,6 +25,7 @@ const message = {
 
 const Control = () => {
 
+  const { user } = useAuth();
   const { content : {socketIO} } = useContext(ContextSocket);
   const { dataAcceso, loadingAcceso, errorAcceso, updateAcceso } = useAcceso();
   const { createHistory } = useHistory();
@@ -51,14 +54,16 @@ const Control = () => {
 
   return (
     <div className="cont__control">
-      <h2>Control de Componentes</h2>
+      <h2>Control de los Accesos</h2>
       <hr className="mb-5 mt-3 mb-2" />
       {!loadingAcceso && !errorAcceso &&
         <div className="content__card" data-aos="fade-up">
           {dataAcceso.map((c) => (
             <CardComponent key={c.id} data={c} idComponent={c.id} action={c.action} nameComponent={c.descripcion} created={c.createdAt.substring(0,10)} statusComponent={c.status} iconComponent={faQuestionCircle} eventClick={handleChangeCheck}/>  
           ))}
-          <CardComponent nameComponent="Nuevo Componente" iconComponent={faPlus} newComponent={true} eventComponent={()=>{setshow(!show)}}/>
+          {user.tipo === ADMINISTRADOR &&
+            <CardComponent nameComponent="Nuevo Componente" iconComponent={faPlus} newComponent={true} eventComponent={()=>{setshow(!show)}}/>
+          }
         </div>
       }
       <PopUpEmpty show={show} hide={setshow}>

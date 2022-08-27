@@ -45,7 +45,7 @@ export const useUser = () => {
       });
   };
 
-  const listUsers = useCallback(async (id) => {
+  const listUsers = useCallback(async (id = '') => {
     console.log("Ejecutando listUsers", id)
     await axios
       .get(`http://192.168.1.58:4000/api/user/${id}`,{headers:{'tsec': user.token}})

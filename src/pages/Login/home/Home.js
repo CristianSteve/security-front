@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Aos from "aos";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { HashLink } from 'react-router-hash-link';
 
 import "aos/dist/aos.css";
 import "./home.scss";
@@ -27,18 +28,27 @@ const Home = () => {
           </div>
           <div className="item">
             <div>
-              <Link to="/">
+              <HashLink smooth to="/#inicio">
                 <img src="https://i.ibb.co/z4bDXz8/Logo.jpg" alt="logo" />
                 Windoor <span>Security</span>
-              </Link>
+              </HashLink>
             </div>
             <ul>
-              <li>Inicio</li>
-              <li>Objetivos</li>
-              <li>Alcance</li>
+              <li>
+                <HashLink smooth to="/#introduccion">Introducción</HashLink>
+              </li>
+              <li>
+                <HashLink smooth to="/#objectivo">Objetivos</HashLink>
+              </li>
+              <li>
+                <HashLink smooth to="/#alcance">Alcance</HashLink>
+              </li>
+              <li>
+                <HashLink smooth to="/#participante">Participantes</HashLink>
+              </li>
             </ul>
             <div className="links">
-              <Link to="/login">Login</Link>
+              <HashLink smooth to="/login">Login</HashLink>
               <Link className="btn btn-primary" to="/signup">
                 Registrarse
               </Link>
@@ -46,7 +56,7 @@ const Home = () => {
           </div>
         </nav>
       </header>
-      <div className="ghsty_s">
+      <div id="inicio" className="ghsty_s">
         <div className="card_p">
           <div className="card_h">
             <div data-aos="fade-up">
@@ -70,7 +80,7 @@ const Home = () => {
           </div>
         </div>
         <div className="ghsty_s_l">
-          <div>
+          <div id="introduccion">
             <div className="f_red">
               <span data-aos="fade-up">Introducción</span>
             </div>
@@ -92,7 +102,7 @@ const Home = () => {
               />
             </div>
           </div>
-          <div>
+          <div id="objectivo">
             <div className="f_blank">
               <span data-aos="fade-up">Objetivos</span>
             </div>
@@ -115,7 +125,7 @@ const Home = () => {
               <img src="https://i.ibb.co/3mfX0fx/goals.png" alt="objectives" />
             </div>
           </div>
-          <div>
+          <div id="alcance">
             <div className="f_green">
               <span data-aos="fade-up">Alcance</span>
             </div>
@@ -139,13 +149,13 @@ const Home = () => {
               <img src="https://i.ibb.co/HGwLcc6/scope.png" alt="scope" />
             </div>
           </div>
-          <div>
+          <div id="participante">
             <div className="f_gray">
               <span data-aos="fade-up">Participantes</span>
             </div>
             <div>
               <p>Leidy Caterine Ariza Ballesteros</p>
-              <p>Jorge Castro</p>
+              <p>Jorge Esneider Castro</p>
               <p>Cristian Steve Carrillo Soracipa</p>
             </div>
           </div>

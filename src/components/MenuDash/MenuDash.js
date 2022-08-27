@@ -43,41 +43,49 @@ export const MenuDash = ({ children }) => {
       title: "DashBoard",
       icon: faChartLine,
       enlace: "/status",
+      owner : "all",
     },
     {
       title: "Administrador",
       icon: faUserNinja,
       enlace: "/administrador",
+      owner : "administrador",
     },
     {
       title: "Configuraciones",
       icon: faCogs,
       enlace: "/setting",
+      owner : "all",
     },
     {
       title: "Accesos",
       icon: faParachuteBox,
       enlace: "/accesos",
+      owner : "administrador",
     },
     {
       title: "Seguimiento",
       icon: faBookReader,
       enlace: "/seguimiento",
+      owner : "all",
     },
     {
       title: "Control Acceso",
       icon: faLockOpen,
       enlace: "/control",
+      owner : "all",
     },
     {
       title: "Historico",
       icon: faHistory,
       enlace: "/history",
+      owner : "all",
     },
     {
       title: "Sensores",
       icon: faEnvelope,
       enlace: "#",
+      owner : "all",
       subitem : [
         {
           title: "Nuevo Sensor",
@@ -107,27 +115,39 @@ export const MenuDash = ({ children }) => {
         </div>
         <ul className="nav_list">
           {data.map((item, i) => (
-            <li key={i}>
-              <Link to={item.enlace}>
-                <FontAwesomeIcon icon={item.icon} />
-                <span className="links_name">{item.title}</span>
-                {!!item?.subitem && <FontAwesomeIcon icon={faArrowDown} />}
-              </Link>
+            (item.owner !== "administrador" ?
+              <li key={i}>
+                <Link to={item.enlace}>
+                  <FontAwesomeIcon icon={item.icon} />
+                  <span className="links_name">{item.title}</span>
+                  {!!item?.subitem && <FontAwesomeIcon icon={faArrowDown} />}
+                </Link>
+                <span className="tooltip_dash">{item.title}</span>
+                {!!item?.subitem && (
+                  <ul className="sub-item">
+                    {item.subitem.map((sub, i) => (
+                      <li key={i}>
+                        <Link to={sub.enlace}>
+                          <FontAwesomeIcon icon={sub.icon} />
+                          <span className="links_name">{sub.title}</span>
+                        </Link>
+                        <span className="tooltip_dash">{sub.title}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            :
+            item.owner === "administrador" && user.tipo === "Administrador" &&
+              <li key={i}>
+                <Link to={item.enlace}>
+                  <FontAwesomeIcon icon={item.icon} />
+                  <span className="links_name">{item.title}</span>
+                  {!!item?.subitem && <FontAwesomeIcon icon={faArrowDown} />}
+                </Link>
               <span className="tooltip_dash">{item.title}</span>
-              {!!item?.subitem && (
-                <ul className="sub-item">
-                  {item.subitem.map((sub, i) => (
-                    <li key={i}>
-                      <Link to={sub.enlace}>
-                        <FontAwesomeIcon icon={sub.icon} />
-                        <span className="links_name">{sub.title}</span>
-                      </Link>
-                      <span className="tooltip_dash">{sub.title}</span>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </li>
+              </li>
+            )
           ))}
         </ul>
         <div className="profile_content">
